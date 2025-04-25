@@ -55,7 +55,7 @@ onUnmounted(() => {
         rounded
         variant="outlined"
       >
-        <RouterLink to="/create" :class="slotProps.class">
+        <RouterLink to="/pricing" :class="slotProps.class">
           Create Perfect Shot
         </RouterLink>
       </Button>
@@ -102,7 +102,7 @@ onUnmounted(() => {
           rounded
           variant="outlined"
         >
-          <RouterLink to="/create" :class="slotProps.class">
+          <RouterLink to="/pricing" :class="slotProps.class">
             Create Perfect Shot
           </RouterLink>
         </Button>

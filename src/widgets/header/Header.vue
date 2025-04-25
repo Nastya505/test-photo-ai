@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue';
+import { onMounted, onUnmounted,watch, ref } from 'vue';
 
 const isMobileMenuOpen = ref(false);
+const hasScrolled = ref(false);
+
 const navLinks = [
   { label: 'Pricing', href: '#' },
   { label: 'Billing', href: '#' },
@@ -22,17 +24,31 @@ function handleKeydown(e: KeyboardEvent) {
   }
 }
 
+function onScroll() {
+  hasScrolled.value = window.scrollY !== 0;
+}
+
 onMounted(() => {
+  window.addEventListener('scroll', onScroll);
   window.addEventListener('keydown', handleKeydown);
+  onScroll(); 
 });
+
 onUnmounted(() => {
+  window.removeEventListener('scroll', onScroll);
   window.removeEventListener('keydown', handleKeydown);
 });
+
 </script>
 
 <template>
-  <header class="flex w-full justify-between items-center py-4">
-    <!-- Logo -->
+<header
+  :class="[
+    'fixed top-0 left-0 right-0 z-50 px-4 md:px-8 py-4 flex w-full justify-between items-center transition-all duration-300',
+    hasScrolled ? 'bg-black/30 backdrop-blur shadow-md' : 'bg-transparent'
+  ]"
+>
+  <!-- Logo -->
     <Image src="/images/logo.svg" alt="logo" width="150" />
 
     <!-- Desktop Navigation -->
@@ -67,21 +83,21 @@ onUnmounted(() => {
       aria-label="Open mobile menu"
       @click="toggleMenu"
     >
-      <i class="pi pi-align-justify" style="font-size: 1.5rem" />
+      <i class="pi pi-align-justify" style="font-size: 2rem" />
     </button>
 
     <!-- Mobile Menu Overlay -->
     <transition name="fade">
       <div
         v-if="isMobileMenuOpen"
-        class="fixed inset-0 z-50 bg-black text-white flex flex-col items-center justify-center space-y-8 text-2xl"
+        class="fixed inset-0 z-50 h-screen bg-black text-white flex flex-col items-center justify-center space-y-8 text-2xl"
       >
         <button
           class="absolute top-6 right-6 text-white"
           aria-label="Close mobile menu"
           @click="closeMenu"
         >
-          <i class="pi pi-times" style="font-size: 1.5rem" />
+          <i class="pi pi-times" style="font-size: 2rem" />
         </button>
 
         <a

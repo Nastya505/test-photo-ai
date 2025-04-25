@@ -1,10 +1,8 @@
-<template>
-  <div>
-    <h1 class="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-    <i class="pi pi-check" />
+<script setup>
+</script>
 
-    <Button label="Info" severity="info" />
+<template>
+  <div class="">
+    Home
   </div>
 </template>

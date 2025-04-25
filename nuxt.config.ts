@@ -27,4 +27,7 @@ export default defineNuxtConfig({
       tailwindcss(),
     ],
   },
+  routeRules: {
+    '/create': { redirect: 'https://photoai.artlogo.co/' },
+  },
 });

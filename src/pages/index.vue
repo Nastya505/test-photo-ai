@@ -1,4 +1,6 @@
 <script setup>
+import { DefaultButton } from '@/widgets/button';
+
 import { DefaultBlockImage, TableImagesBlock, TwoColTextAndImageBlock } from '@/widgets/imageBlock';
 </script>
 
@@ -12,17 +14,7 @@ import { DefaultBlockImage, TableImagesBlock, TwoColTextAndImageBlock } from '@/
         AI-powered headshots—no photographers, no hassle. Upload, customize, and get pro-quality images instantly
       </h3>
     </div>
-    <Button
-      v-slot="slotProps"
-      large
-      as-child
-      rounded
-      severity="contrast"
-    >
-      <RouterLink to="/pricing" class="!px-8 !py-4 font-semibold" :class="slotProps.class">
-        Create Perfect Shot
-      </RouterLink>
-    </Button>
+    <DefaultButton text="Create Perfect Shot" link="/create" />
   </div>
   <TableImagesBlock class="my-40" />
   <TwoColTextAndImageBlock class="my-40" fs-class-title="text-6xl" title="Crazy detailed AI image generator" img-url="/images/photo-details.webp" />

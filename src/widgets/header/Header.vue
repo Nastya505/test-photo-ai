@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { DefaultButton } from '@/widgets/button';
 import { onMounted, onUnmounted, ref } from 'vue';
 
 const isMobileMenuOpen = ref(false);
@@ -61,17 +62,7 @@ onUnmounted(() => {
           {{ link.label }}
         </a>
       </div>
-      <Button
-        as-child
-        class="min-w-48"
-        severity="contrast"
-        rounded
-        variant="outlined"
-      >
-        <RouterLink to="/pricing">
-          Create Perfect Shot
-        </RouterLink>
-      </Button>
+      <DefaultButton text="Create Perfect Shot" link="/pricing" variant="outlined" />
     </nav>
 
     <!-- Mobile Menu Button -->
@@ -107,17 +98,7 @@ onUnmounted(() => {
           {{ link.label }}
         </a>
 
-        <Button
-          as-child
-          class="min-w-48"
-          severity="contrast"
-          rounded
-          variant="outlined"
-        >
-          <RouterLink to="/pricing">
-            Create Perfect Shot
-          </RouterLink>
-        </Button>
+        <DefaultButton text="Create Perfect Shot" link="/pricing" variant="outlined" />
       </div>
     </transition>
   </header>

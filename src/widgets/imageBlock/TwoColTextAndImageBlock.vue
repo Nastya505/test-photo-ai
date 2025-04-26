@@ -13,19 +13,17 @@ const props = withDefaults(
     orderImage: '1',
   },
 );
-
 </script>
 
 <template>
   <div class="flex flex-col justify-between w-full items-start gap-10 md:flex-row">
     <div
-      :class="[
+      class="flex flex-col justify-center w-full max-w-[470px] items-start gap-5" :class="[
         `order-${props.orderImage}`,
-        'flex flex-col justify-center w-full max-w-[470px] items-start gap-5'
       ]"
     >
       <h2
-        :class="[fsClassTitle ?? 'text-4xl', 'text-white font-medium']"
+        class="text-white font-medium" :class="[fsClassTitle ?? 'text-4xl']"
       >
         {{ props.title }}
       </h2>
@@ -37,7 +35,7 @@ const props = withDefaults(
     </div>
 
     <Image
-      :class="[props.orderImage === '1' ? 'order-1 md:order-2 ' : 'order-2 md:order-1', 'w-full max-w-[800px]']"
+      class="w-full max-w-[800px]" :class="[props.orderImage === '1' ? 'order-1 md:order-2 ' : 'order-2 md:order-1']"
       :src="props.imgUrl"
     />
   </div>

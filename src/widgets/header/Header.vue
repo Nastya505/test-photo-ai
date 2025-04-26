@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted,watch, ref } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 
 const isMobileMenuOpen = ref(false);
 const hasScrolled = ref(false);
@@ -31,24 +31,22 @@ function onScroll() {
 onMounted(() => {
   window.addEventListener('scroll', onScroll);
   window.addEventListener('keydown', handleKeydown);
-  onScroll(); 
+  onScroll();
 });
 
 onUnmounted(() => {
   window.removeEventListener('scroll', onScroll);
   window.removeEventListener('keydown', handleKeydown);
 });
-
 </script>
 
 <template>
-<header
-  :class="[
-    'fixed top-0 left-0 right-0 z-50 px-4 md:px-8 py-4 flex w-full justify-between items-center transition-all duration-300',
-    hasScrolled ? 'bg-black/30 backdrop-blur shadow-md' : 'bg-transparent'
-  ]"
->
-  <!-- Logo -->
+  <header
+    class="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 py-4 flex w-full justify-between items-center transition-all duration-300" :class="[
+      hasScrolled ? 'bg-black/30 backdrop-blur shadow-md' : 'bg-transparent',
+    ]"
+  >
+    <!-- Logo -->
     <Image src="/images/logo.svg" alt="logo" width="150" />
 
     <!-- Desktop Navigation -->
@@ -64,14 +62,13 @@ onUnmounted(() => {
         </a>
       </div>
       <Button
-        v-slot="slotProps"
         as-child
         class="min-w-48"
         severity="contrast"
         rounded
         variant="outlined"
       >
-        <RouterLink to="/pricing" :class="slotProps.class">
+        <RouterLink to="/pricing">
           Create Perfect Shot
         </RouterLink>
       </Button>
@@ -111,14 +108,13 @@ onUnmounted(() => {
         </a>
 
         <Button
-          v-slot="slotProps"
           as-child
           class="min-w-48"
           severity="contrast"
           rounded
           variant="outlined"
         >
-          <RouterLink to="/pricing" :class="slotProps.class">
+          <RouterLink to="/pricing">
             Create Perfect Shot
           </RouterLink>
         </Button>

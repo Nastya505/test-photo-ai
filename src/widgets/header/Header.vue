@@ -1,7 +1,12 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue';
+import { DefaultButton } from '@/widgets/button';
+import { useWindowScroll } from '@vueuse/core';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 
 const isMobileMenuOpen = ref(false);
+const { y } = useWindowScroll();
+const hasScrolled = computed(() => y.value > 0);
+
 const navLinks = [
   { label: 'Pricing', href: '#' },
   { label: 'Billing', href: '#' },
@@ -10,10 +15,12 @@ const navLinks = [
 
 function toggleMenu() {
   isMobileMenuOpen.value = !isMobileMenuOpen.value;
+  document.body.classList.toggle('overflow-hidden', isMobileMenuOpen.value);
 }
 
 function closeMenu() {
   isMobileMenuOpen.value = false;
+  document.body.classList.remove('overflow-hidden');
 }
 
 function handleKeydown(e: KeyboardEvent) {
@@ -25,13 +32,20 @@ function handleKeydown(e: KeyboardEvent) {
 onMounted(() => {
   window.addEventListener('keydown', handleKeydown);
 });
+
 onUnmounted(() => {
   window.removeEventListener('keydown', handleKeydown);
+  document.body.classList.remove('overflow-hidden');
 });
 </script>
 
 <template>
-  <header class="flex w-full justify-between items-center py-4">
+  <header
+    class="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 py-4 flex w-full justify-between items-center transition-all duration-300"
+    :class="[
+      hasScrolled ? 'bg-black/30 backdrop-blur shadow-md' : 'bg-transparent',
+    ]"
+  >
     <!-- Logo -->
     <Image src="/images/logo.svg" alt="logo" width="150" />
 
@@ -47,18 +61,7 @@ onUnmounted(() => {
           {{ link.label }}
         </a>
       </div>
-      <Button
-        v-slot="slotProps"
-        as-child
-        class="min-w-48"
-        severity="contrast"
-        rounded
-        variant="outlined"
-      >
-        <RouterLink to="/pricing" :class="slotProps.class">
-          Create Perfect Shot
-        </RouterLink>
-      </Button>
+      <DefaultButton text="Create Perfect Shot" link="/pricing" variant="outlined" />
     </nav>
 
     <!-- Mobile Menu Button -->
@@ -67,45 +70,35 @@ onUnmounted(() => {
       aria-label="Open mobile menu"
       @click="toggleMenu"
     >
-      <i class="pi pi-align-justify" style="font-size: 1.5rem" />
+      <i class="pi pi-align-justify" style="font-size: 3rem" />
     </button>
 
     <!-- Mobile Menu Overlay -->
     <transition name="fade">
       <div
         v-if="isMobileMenuOpen"
-        class="fixed inset-0 z-50 bg-black text-white flex flex-col items-center justify-center space-y-8 text-2xl"
+        class="fixed inset-0 z-50 h-screen bg-black text-white flex flex-col gap-16 py-20 px-8 items-start justify-start text-2xl"
       >
         <button
-          class="absolute top-6 right-6 text-white"
+          class="absolute top-6 right-6 text-white z-50"
           aria-label="Close mobile menu"
           @click="closeMenu"
         >
-          <i class="pi pi-times" style="font-size: 1.5rem" />
+          <i class="pi pi-times" style="font-size: 3rem" />
         </button>
 
         <a
           v-for="link in navLinks"
           :key="link.label"
           :href="link.href"
-          class="link-underline"
+          class="link-underline z-50 scale-125"
           @click="closeMenu"
         >
           {{ link.label }}
         </a>
 
-        <Button
-          v-slot="slotProps"
-          as-child
-          class="min-w-48"
-          severity="contrast"
-          rounded
-          variant="outlined"
-        >
-          <RouterLink to="/pricing" :class="slotProps.class">
-            Create Perfect Shot
-          </RouterLink>
-        </Button>
+        <DefaultButton class="z-50 scale-150 ml-8" text="Create Perfect Shot" link="/pricing" variant="outlined" />
+        <Image class="absolute -bottom-64 right-0 z-40" src="/images/menu-effect.png" alt="logo" width="770" />
       </div>
     </transition>
   </header>

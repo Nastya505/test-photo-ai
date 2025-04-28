@@ -1,4 +1,5 @@
 <script setup>
+import { BlockPricing } from '@/widgets/block-pricing';
 import { FAQSection } from '@/widgets/FAQ';
 import { PerfectShotSection } from '@/widgets/imageBlock';
 </script>
@@ -25,6 +26,8 @@ import { PerfectShotSection } from '@/widgets/imageBlock';
       </RouterLink>
     </Button>
   </div>
+
+  <BlockPricing />
   <FAQSection
     class="my-40"
     section-title="Frequently asked questions"

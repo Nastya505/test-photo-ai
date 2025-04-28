@@ -1,8 +1,7 @@
 <script setup>
 import { DefaultButton } from '@/widgets/button';
 import { FAQSection } from '@/widgets/FAQ';
-import { PerfectShotSection } from '@/widgets/imageBlock';
-import { DefaultBlockImage, TableImagesBlock, TwoColTextAndImageBlock } from '@/widgets/imageBlock';
+import { DefaultBlockImage, PerfectShotSection, TableImagesBlock, TwoColTextAndImageBlock } from '@/widgets/imageBlock';
 </script>
 
 <template>

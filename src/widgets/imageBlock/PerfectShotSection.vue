@@ -1,11 +1,12 @@
 <script setup lang="ts">
+import { DefaultButton } from '../button';
+
 defineProps<{
   title: string;
   imageUrl: string;
   buttonText: string;
   description: string;
 }>();
-
 async function copyToClipboard(text: string) {
   await navigator.clipboard.writeText(text);
 }
@@ -21,10 +22,10 @@ async function copyToClipboard(text: string) {
         {{ title }}
       </h2>
       <div>
-        <button class="bg-white text-black font-semibold py-3 px-6 rounded-full mb-6">
-          {{ buttonText }}
-        </button>
-
+        <DefaultButton
+          class="mb-5"
+          text="Create Perfect Shot" link="/pricing"
+        />
         <div class="relative w-full group flex justify-start gap-4 items-start">
           <p class="text-white/30 max-w-96 italic text-base font-semibold line-clamp-5">
             {{ description }}

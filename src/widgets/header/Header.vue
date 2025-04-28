@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { DefaultButton } from '@/widgets/button';
-import { onMounted, onUnmounted, ref } from 'vue';
+import { useWindowScroll } from '@vueuse/core';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 
 const isMobileMenuOpen = ref(false);
-const hasScrolled = ref(false);
+const { y } = useWindowScroll();
+const hasScrolled = computed(() => y.value > 0);
 
 const navLinks = [
   { label: 'Pricing', href: '#' },
@@ -27,18 +29,11 @@ function handleKeydown(e: KeyboardEvent) {
   }
 }
 
-function onScroll() {
-  hasScrolled.value = window.scrollY !== 0;
-}
-
 onMounted(() => {
-  window.addEventListener('scroll', onScroll);
   window.addEventListener('keydown', handleKeydown);
-  onScroll();
 });
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', onScroll);
   window.removeEventListener('keydown', handleKeydown);
   document.body.classList.remove('overflow-hidden');
 });
@@ -46,7 +41,8 @@ onUnmounted(() => {
 
 <template>
   <header
-    class="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 py-4 flex w-full justify-between items-center transition-all duration-300" :class="[
+    class="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 py-4 flex w-full justify-between items-center transition-all duration-300"
+    :class="[
       hasScrolled ? 'bg-black/30 backdrop-blur shadow-md' : 'bg-transparent',
     ]"
   >

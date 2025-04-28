@@ -1,5 +1,6 @@
 <script setup>
 import { FAQSection } from '@/widgets/FAQ';
+import { PerfectShotSection } from '@/widgets/imageBlock';
 </script>
 
 <template>
@@ -34,4 +35,5 @@ import { FAQSection } from '@/widgets/FAQ';
       { title: 'I canceled Headshot AI but am still being charged', content: 'yes' },
     ]"
   />
+  <PerfectShotSection button-text="Create Perfect Shot" title="And woila, your perfect Headshot is finally done!" image-url="/images/perfect-photo.webp" description="A high-fashion photo of a female model sitting in a clean, minimalistic studio environment. She is wearing a silky red tailored suit with a smooth, elegant blouse and wide-leg trousers. The outfit drapes gracefully, highlighting the luxurious texture of the fabric. The model is accessorized with bold, gold statement earrings, adding a touch of sophistication. She poses with a relaxed yet confident expression, and the soft studio lighting casts subtle shadows, enhancing the contours of the outfit and the model's features. The overall aesthetic is sleek, elegant, and modern. Ultra-realistic, 4K resolution, studio fashion photography" />
 </template>

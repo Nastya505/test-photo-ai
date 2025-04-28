@@ -120,7 +120,7 @@ watch(isDesktop, (value) => {
       </h2>
       <div class="flex gap-1 justify-center items-center">
         <button
-          class="px-4 py-2 rounded-xl text-sm sm:text-lg transition-all"
+          class="cursor-pointer px-4 py-2 rounded-xl text-sm sm:text-lg transition-all"
           :class="[
             billingCycle === 'monthly' ? 'bg-white text-black' : 'bg-white/10 text-white',
           ]"
@@ -129,7 +129,7 @@ watch(isDesktop, (value) => {
           Monthly
         </button>
         <button
-          class="flex gap-2 px-4 text-sm sm:text-lg py-2 rounded-xl transition-all"
+          class="cursor-pointer flex gap-2 px-4 text-sm sm:text-lg py-2 rounded-xl transition-all"
           :class="[
             billingCycle === 'yearly' ? 'bg-white text-black' : 'text-white bg-white/10',
           ]"
@@ -180,7 +180,7 @@ watch(isDesktop, (value) => {
               </h3>
 
               <button
-                class="text-xs md:text-base lg:text-sm xl:text-base  border-none flex gap-2 justify-center items-center transition-colors text-white/30 hover:text-white"
+                class="cursor-pointer text-xs md:text-base lg:text-sm xl:text-base  border-none flex gap-2 justify-center items-center transition-colors text-white/30 hover:text-white"
                 @click="toggleBillingCycle"
               >
                 <span>{{ billingCycle === 'monthly' ? 'View Yearly' : 'View Monthly' }}</span>
@@ -203,7 +203,7 @@ watch(isDesktop, (value) => {
             </transition>
 
             <button
-              class="w-full py-5 px-8 rounded-full font-semibold text-white bg-white/10 hover:bg-white hover:text-black transition-all duration-300 mb-6"
+              class="w-full cursor-pointer py-5 px-8 rounded-full font-semibold text-white bg-white/10 hover:bg-white hover:text-black transition-all duration-300 mb-6"
             >
               {{ plan.buttonText }}
             </button>
@@ -239,7 +239,7 @@ watch(isDesktop, (value) => {
 
               <button
                 v-if="plan.features.length > 8"
-                class="mt-2 text-xs opacity-50 hover:opacity-100 transition-all flex items-center gap-1"
+                class="cursor-pointer mt-2 text-xs opacity-50 hover:opacity-100 transition-all flex items-center gap-1"
                 @click="toggleExpanded(plan.name)"
               >
                 <span>{{ expandedPlans[plan.name] ? 'show less' : `${plan.features.length - 8} more` }}</span>

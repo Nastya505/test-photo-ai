@@ -1,5 +1,6 @@
 <script setup>
 import { DefaultButton } from '@/widgets/button';
+import { BlockPricing } from '@/widgets/block-pricing';
 import { FAQSection } from '@/widgets/FAQ';
 import { DefaultBlockImage, PerfectShotSection, TableImagesBlock, TwoColTextAndImageBlock } from '@/widgets/imageBlock';
 </script>
@@ -21,6 +22,7 @@ import { DefaultBlockImage, PerfectShotSection, TableImagesBlock, TwoColTextAndI
   <TwoColTextAndImageBlock class="my-40" title="Just upload your photo, choose style and if you want some parameters" img-url="/images/photo-selection.webp" />
   <DefaultBlockImage class="my-40" title="Best platform for your perfect Headshots" img-url="/images/preview-photo-ai.webp" />
   <DefaultBlockImage class="my-40" title="Create video clips with AI" subtitle="Take any AI photo you generated, and turn it into a video by tapping [ Make video ]. A few minutes later you have a short video clip of the photo giving you an immersive virtual reality like experience." img-url="/images/preview-guide-photo-ai.webp" />
+  <BlockPricing />
   <FAQSection
     class="my-40"
     section-title="Frequently asked questions"

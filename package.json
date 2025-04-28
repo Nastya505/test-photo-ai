@@ -20,6 +20,7 @@
     "openapi-fetch": "^0.13.5",
     "primeicons": "^7.0.0",
     "primevue": "^4.3.3",
+    "swiper": "^11.2.6",
     "tailwindcss": "^4.1.4",
     "tailwindcss-primeui": "^0.6.1",
     "vue": "^3.5.13",

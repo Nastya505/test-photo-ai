@@ -8,7 +8,7 @@ defineProps<{
 </script>
 
 <template>
-  <a :href="`/photo/${photo.id}`">
+  <a :href="`/photo/${photo.id}`" class="relative">
     <BlurImage
       :src="photo.image_url!"
       :blurhash="photo.blurhash!"
@@ -16,8 +16,9 @@ defineProps<{
       :height="200"
       alt="Photo"
     />
-    <!-- <div class="text-center mt-2">
-      {{ photo.prompt }}
-    </div> -->
+    <div class="absolute bottom-0 left-0 italic w-8/9 p-4 text-white text-base font-semibold whitespace-nowrap overflow-hidden text-ellipsis">
+  {{ photo.prompt }}
+</div>
+
   </a>
 </template>

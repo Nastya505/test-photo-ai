@@ -43,7 +43,6 @@ function handleImageLoad() {
 
 <template>
   <div class="relative w-full h-full ">
-    <!-- BlurHash canvas -->
     <canvas
       v-if="!isLoaded"
       ref="canvasRef"
@@ -52,7 +51,6 @@ function handleImageLoad() {
       class="absolute inset-0 w-full h-full object-cover"
     />
 
-    <!-- Основное изображение -->
     <img
       :src="src"
       :alt="alt ?? 'Image'"
@@ -62,13 +60,3 @@ function handleImageLoad() {
     >
   </div>
 </template>
-
-<style scoped>
-/* Небольшая стилизация для плавности */
-.opacity-0 {
-  opacity: 0;
-}
-.opacity-100 {
-  opacity: 1;
-}
-</style>

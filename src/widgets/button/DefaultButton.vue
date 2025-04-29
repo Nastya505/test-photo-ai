@@ -5,10 +5,15 @@ const props = withDefaults(
     text?: string;
     link?: string;
     variant?: 'filled' | 'outlined';
+    icon?: string | null;
+    styles?: string;
+    positionIcon?:'left'|'right'
   }>(),
   {
     variant: 'filled',
     component: 'a',
+    icon: null,
+    positionIcon:'right'
   },
 );
 
@@ -19,13 +24,24 @@ const variantClasses = {
   outlined: 'bg-transparent px-4 py-2 text-base font-medium text-white border border-white hover:bg-white hover:text-[#223]  active:bg-white active:text-[#223]',
 };
 </script>
-
 <template>
   <component
     :is="props.component"
     :href="props.component === 'a' ? props.link : undefined"
+    :style="props.styles"
     :class="[baseClasses, variantClasses[props.variant]]"
   >
+    <i
+      v-if="icon !== null && props.positionIcon === 'left'"
+      :class="`pi ${icon}`"
+      style="font-size: 1.15rem"
+    />
     {{ props.text }}
+    <i
+      v-if="icon !== null && props.positionIcon === 'right'"
+      :class="`pi ${icon}`"
+      style="font-size: 1.15rem"
+    />
   </component>
 </template>
+

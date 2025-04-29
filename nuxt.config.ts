@@ -14,7 +14,7 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css', 'primeicons/primeicons.css'],
   modules: [
     '@primevue/nuxt-module',
-    ],
+  ],
   primevue: {
     options: {
       theme: {
@@ -38,6 +38,6 @@ export default defineNuxtConfig({
   },
   routeRules: {
     '/create': { redirect: 'https://photoai.artlogo.co/' },
-    '/pricing': { redirect: '#' },
+    '/pricing': { redirect: '/#pricing' },
   },
 });

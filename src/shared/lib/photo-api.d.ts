@@ -134,6 +134,11 @@ export interface components {
         /** ExampleModelInfo */
         ExampleModelInfo: {
             /**
+             * Name
+             * @description Name of the model
+             */
+            name: string;
+            /**
              * Cover Url
              * @description URL of the model's cover image
              */

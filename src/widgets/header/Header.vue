@@ -8,9 +8,9 @@ const { y } = useWindowScroll();
 const hasScrolled = computed(() => y.value > 0);
 
 const navLinks = [
-  { label: 'Pricing', href: '#' },
+  { label: 'Pricing', href: '#pricing' },
   { label: 'Billing', href: '#' },
-  { label: 'Gallery', href: '#' },
+  { label: 'Gallery', href: '#gallery' },
 ];
 
 function toggleMenu() {
@@ -41,13 +41,15 @@ onUnmounted(() => {
 
 <template>
   <header
-    class="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 py-4 flex w-full justify-between items-center transition-all duration-300"
+    class="fixed top-0 left-0 right-0 z-50 px-2 md:px-8 py-4 flex w-full justify-between items-center transition-all duration-300"
     :class="[
       hasScrolled ? 'bg-black/30 backdrop-blur shadow-md' : 'bg-transparent',
     ]"
   >
     <!-- Logo -->
-    <Image src="/images/logo.svg" alt="logo" width="150" />
+    <RouterLink to="/">
+      <Image src="/images/logo.svg" alt="logo" width="150" />
+    </RouterLink>
 
     <!-- Desktop Navigation -->
     <nav class="hidden md:flex justify-end items-center gap-8">

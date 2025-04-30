@@ -1,8 +1,9 @@
 <script setup>
-import { DefaultButton } from '@/widgets/button';
 import { BlockPricing } from '@/widgets/block-pricing';
+import { DefaultButton } from '@/widgets/button';
 import { FAQSection } from '@/widgets/FAQ';
 import { DefaultBlockImage, PerfectShotSection, TableImagesBlock, TwoColTextAndImageBlock } from '@/widgets/imageBlock';
+import { TrustpilotWithImage, TrustpilotWithReviews } from '@/widgets/trustpilot';
 </script>
 
 <template>
@@ -17,6 +18,8 @@ import { DefaultBlockImage, PerfectShotSection, TableImagesBlock, TwoColTextAndI
     </div>
     <DefaultButton text="Create Perfect Shot" link="/create" />
   </div>
+  <TrustpilotWithReviews title="Customers can’t stop raving about their Headshots" button-text="Create Perfect Shot" />
+  <TrustpilotWithImage title="Start taking AI photos now" description="Generate photorealistic images and videos of people with AI. Take stunning photos of people with the first AI Photographer! Generate photo and video content for your social media with AI. Save time and money and do an AI photo" button-text="Create Perfect Shot" />
   <TableImagesBlock class="my-40" />
   <TwoColTextAndImageBlock class="my-40" fs-class-title="text-6xl" title="Crazy detailed AI image generator" img-url="/images/photo-details.webp" />
   <TwoColTextAndImageBlock class="my-40" title="Just upload your photo, choose style and if you want some parameters" img-url="/images/photo-selection.webp" />

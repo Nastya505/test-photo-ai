@@ -1,20 +1,16 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { questions } from '@/shared/data/faq';
 
 defineProps<{
   sectionTitle: string;
   imageSrc: string;
-  questions: {
-    title: string;
-    content: string;
-  }[];
 }>();
 
 const activePanels = ref<string[]>(['0']);
 </script>
 
 <template>
-  <section>
     <div class="flex flex-col md:flex-row w justify-between items-start gap-8">
       <div class="card w-full max-w-[700px]">
         <h2 class="text-2xl sm:text-6xl text-center sm:text-left font-medium mb-6 sm:mb-10">
@@ -35,10 +31,6 @@ const activePanels = ref<string[]>(['0']);
         <Image :src="imageSrc" alt="Photo FAQ" class="w-full h-auto object-cover" />
       </div>
     </div>
-    <div class="overflow-hidden rounded-lg max-w-[700px]">
-      <Image :src="imageSrc" alt="Photo FAQ" class="w-full h-auto object-cover" />
-    </div>
-  </section>
 </template>
 
 <style scoped>

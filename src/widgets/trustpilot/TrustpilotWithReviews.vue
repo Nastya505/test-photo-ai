@@ -1,13 +1,12 @@
 <script setup lang='ts'>
+import { reviews } from '@/shared/data/reviews';
 import { DefaultButton } from '@/widgets/button';
 import TestimonialCard from './TestimonialCard.vue';
-import { reviews } from '@/shared/data/reviews';
 
 defineProps<{
   title: string;
   buttonText: string;
 }>();
-
 </script>
 
 <template>

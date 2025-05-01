@@ -28,14 +28,16 @@ const categories = computed(() => {
     .filter(Boolean)
     .map(name => normalizeCategoryName(name!));
   const unique = Array.from(new Set(normalized));
-  return ['All', ...unique ];
+  return ['All', ...unique];
 });
 
 // Filter photos by normalized category name
 const filteredPhotos = computed(() => {
-  if (!selectedCategory.value) return photos.value;
+  if (!selectedCategory.value) {
+    return photos.value;
+  }
   return photos.value.filter(photo =>
-    normalizeCategoryName(photo.prompt_pack?.name || '') === selectedCategory.value
+    normalizeCategoryName(photo.prompt_pack?.name || '') === selectedCategory.value,
   );
 });
 
@@ -107,7 +109,7 @@ watch(() => categoryContainer.value, () => checkOverflow());
         <div
           v-for="i in (isDesktopSnapshot ? 12 : 11)"
           :key="`placeholder-${i}`"
-          :class="['bg-gray-200 rounded-md shadow-sm animate-pulse', getCardClass(i - 1, isTabletSnapshot)]"
+          class="bg-gray-200 rounded-md shadow-sm animate-pulse" :class="[getCardClass(i - 1, isTabletSnapshot)]"
         >
           <div class="w-full h-full rounded-sm bg-gray-300" />
         </div>

@@ -23,22 +23,23 @@ const props = withDefaults(
       ]"
     >
       <h2
-      v-if="props.title"
-        class="text-white font-medium text-2xl text-center md:text-left" :class="[fsClassTitle?`sm:${fsClassTitle}`: 'sm:text-4xl ']"
+        v-if="props.title"
+        class="text-white font-medium text-2xl text-center md:text-left" :class="[fsClassTitle ? `sm:${fsClassTitle}` : 'sm:text-4xl ']"
       >
         {{ props.title }}
       </h2>
       <h3
-      v-if="props.subtitle"
+        v-if="props.subtitle"
         class="text-base text-white font-medium leading-[22px] opacity-80"
       >
         {{ props.subtitle }}
       </h3>
     </div>
-
+<div class="overflow-hidden rounded-sm w-full"  :class="[props.orderImage === '1' ? 'order-1 md:order-2 ' : 'order-2 md:order-1']"
+>
     <Image
-      class="w-full" :class="[props.orderImage === '1' ? 'order-1 md:order-2 ' : 'order-2 md:order-1']"
       :src="props.imgUrl"
     />
+  </div>
   </div>
 </template>

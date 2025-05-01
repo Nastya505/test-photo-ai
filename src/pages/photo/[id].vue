@@ -2,12 +2,12 @@
 import type { components } from '@/shared/lib/photo-api';
 import { getExamples } from '@/shared/lib/api';
 import { DefaultButton } from '@/widgets/button';
-import { TwoColTextAndImageBlock } from '@/widgets/imageBlock';
+import { TwoColTextAndImageBlock } from '@/widgets/media-blocks';
 import { ResultLine } from '@/widgets/resultLine/intex';
-import { computed, onMounted, ref, nextTick} from 'vue';
 import { SwiperDefault } from '@/widgets/swiper';
-import { useRoute, useRouter } from 'vue-router';
 import { domToBlob } from 'modern-screenshot';
+import { computed, nextTick, onMounted, ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute();
 const router = useRouter();
@@ -32,7 +32,6 @@ const nextPhoto = computed(() => {
   return null;
 });
 
-
 const prevPhoto = computed(() => {
   if (currentIndex.value > 0) {
     return allPhotos.value[currentIndex.value - 1];
@@ -45,12 +44,14 @@ function goToPhoto(id: string | number) {
 }
 
 const similarPhotos = computed(() => {
-  if (!currentPhoto.value) return [];
+  if (!currentPhoto.value) {
+    return [];
+  }
   return allPhotos.value
     .filter(
-      (p) =>
-        p.id !== currentPhoto.value?.id &&
-        p.model.name === currentPhoto.value?.model.name
+      p =>
+        p.id !== currentPhoto.value?.id
+        && p.model.name === currentPhoto.value?.model.name,
     )
     .slice(0, 6);
 });
@@ -84,7 +85,7 @@ async function downloadImage() {
   try {
     const blob = await domToBlob(node, {
       quality: 0.95,
-      scale:2,
+      scale: 2,
       type: 'image/jpeg',
       backgroundColor: '#ffffff',
       width: node.clientWidth,
@@ -108,11 +109,9 @@ async function downloadImage() {
     console.error('Download failed:', err);
   }
 }
-
 </script>
 
 <template>
-  
   <div v-if="isLoading" class="text-center flex flex-col gap-4 justify-center items-center h-[80vh]">
     <i class="pi pi-spin pi-spinner" style="font-size: 2rem" />
     <span>Loading</span>
@@ -126,8 +125,8 @@ async function downloadImage() {
     <div class="flex justify-center items-center flex-col">
       <div class="flex justify-between items-center w-full gap-10  flex-col">
         <div class="flex justify-between items-start w-full gap-6 md:gap-8 flex-col md:flex-row">
-          <div class="w-full flex flex-col gap-4 md:w-2/5">         
-            <div class="w-full rounded-2xl overflow-hidden">         
+          <div class="w-full flex flex-col gap-4 md:w-2/5">
+            <div class="w-full rounded-2xl overflow-hidden">
               <img ref="currentPhotoRef" :src="currentPhoto.image_url!" class="w-full h-full">
             </div>
             <div class="flex w-full justify-between items-center md:hidden">
@@ -135,19 +134,19 @@ async function downloadImage() {
                 <DefaultButton
                   v-if="prevPhoto"
                   text="prev prompt"
-                  @click="goToPhoto(prevPhoto.id)"
-                  positionIcon="left"
+                  position-icon="left"
                   icon="pi-arrow-left"
                   variant="outlined"
+                  @click="goToPhoto(prevPhoto.id)"
                 />
               </div>
               <div class="w-1/2 flex justify-end">
                 <DefaultButton
                   v-if="nextPhoto"
                   text="next prompt"
-                  @click="goToPhoto(nextPhoto.id)"
                   icon="pi-arrow-right"
                   variant="outlined"
+                  @click="goToPhoto(nextPhoto.id)"
                 />
               </div>
             </div>
@@ -158,15 +157,17 @@ async function downloadImage() {
             <ResultLine title="Model" :text="currentPhoto.model.name" />
             <ResultLine title="Preset" :text="currentPhoto.prompt_pack?.name" />
             <ResultLine title="License" text="Free to use with backlink to ArtPhoto Ai" />
-            <button @click="downloadImage()" class="cursor-pointer flex items-center gap-2 text-white relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:bg-white after:opacity-100 hover:after:opacity-50">
+            <button class="cursor-pointer flex items-center gap-2 text-white relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:bg-white after:opacity-100 hover:after:opacity-50" @click="downloadImage()">
               <span class="text-lg text-white font-semibold">
                 Download image
               </span>
               <i class="pi pi-download" />
             </button>
             <div v-if="similarPhotos.length" class="w-full flex flex-col gap-2">
-              <h5 class="text-left text-lg font-semibold text-white">Similar Photos</h5>
-              <SwiperDefault :photos="similarPhotos" :go-to-photo="goToPhoto"/>
+              <h5 class="text-left text-lg font-semibold text-white">
+                Similar Photos
+              </h5>
+              <SwiperDefault :photos="similarPhotos" :go-to-photo="goToPhoto" />
             </div>
           </div>
         </div>
@@ -175,19 +176,19 @@ async function downloadImage() {
             <DefaultButton
               v-if="prevPhoto"
               text="prev prompt"
-              @click="goToPhoto(prevPhoto.id)"
-              positionIcon="left"
+              position-icon="left"
               icon="pi-arrow-left"
               variant="outlined"
+              @click="goToPhoto(prevPhoto.id)"
             />
           </div>
           <div class="w-1/2 flex justify-end">
             <DefaultButton
               v-if="nextPhoto"
               text="next prompt"
-              @click="goToPhoto(nextPhoto.id)"
               icon="pi-arrow-right"
               variant="outlined"
+              @click="goToPhoto(nextPhoto.id)"
             />
           </div>
         </div>

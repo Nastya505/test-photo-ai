@@ -1,12 +1,12 @@
 <script setup lang="ts">
+import type { components } from '@/shared/lib/photo-api';
+import { getPacks } from '@/shared/lib/api';
 import { DefaultButton } from '@/widgets/button';
 import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { ref } from 'vue';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import type { components } from '@/shared/lib/photo-api';
-import { getPacks } from '@/shared/lib/api';
 
 const modules = [Navigation];
 const swiperRef = ref<any>(null);
@@ -20,12 +20,12 @@ onMounted(async () => {
   packs.value = await getPacks();
   isLoading.value = false;
   await nextTick();
-  updateNavState(); 
+  updateNavState();
 });
 const validPacks = computed(() =>
   packs.value.filter((p): p is typeof p & { covers: string[] } =>
-    Array.isArray(p.covers) && p.covers.length > 0
-  )
+    Array.isArray(p.covers) && p.covers.length > 0,
+  ),
 );
 const visibleSlides = ref(1);
 const totalSlides = computed(() => validPacks.value.length);
@@ -78,10 +78,10 @@ function updateNavState() {
     </div>
     <div class="w-screen relative mt-9 md:mt-20">
       <Swiper
-      :modules="modules"
-      :slides-per-view="1.1"
-      :initial-slide="0"
-      :space-between="6"
+        :modules="modules"
+        :slides-per-view="1.1"
+        :initial-slide="0"
+        :space-between="6"
         :slides-offset-before="12"
         :slides-offset-after="12"
         :navigation="{
@@ -96,42 +96,45 @@ function updateNavState() {
         class="w-full"
         @swiper="onSwiper"
         @slide-change="updateNavState"
-        >
-        <SwiperSlide
-        v-if="!isLoading"
-        v-for="pack in validPacks"
-        :key="pack.name"
-          class="cursor-pointer group"
-        >
-          <div class="rounded-sm overflow-hidden">
-            <img
-              :src="pack.covers[0]"
-              alt="cover pack"
-              class="w-full h-auto transition-transform duration-300 group-hover:scale-105"
-            >
-          </div>
-
-          <h2
-            class="font-medium text-white max-w-8/9 text-left whitespace-nowrap overflow-hidden text-ellipsis mt-5 mb-3"
-            style="font-size: clamp(1.25rem, 2vw, 1.875rem);"
+      >
+        <template v-if="!isLoading">
+          <SwiperSlide
+            v-for="pack in validPacks"
+            :key="pack.name"
+            class="cursor-pointer group"
           >
-            {{ pack.name }}
-          </h2>
+            <div class="rounded-sm overflow-hidden">
+              <img
+                :src="pack.covers[0]"
+                alt="cover pack"
+                class="w-full h-auto transition-transform duration-300 group-hover:scale-105"
+              >
+            </div>
 
-          <p class="text-white/30 max-w-8/9 italic text-base font-semibold line-clamp-3">
-            {{ pack.description }}
-          </p>
-        </SwiperSlide>
-        <SwiperSlide
-          v-else
-          v-for="n in skeletonCount"
-          :key="`skeleton-${n}`"
-          class="animate-pulse"
-        >
-          <div class="rounded-sm overflow-hidden bg-white h-[500px] w-full"></div>
-          <div class="mt-5 mb-3 h-6 bg-white rounded w-3/4"></div>
-          <div class="h-4 bg-white rounded w-full"></div>
-        </SwiperSlide>
+            <h2
+              class="font-medium text-white max-w-8/9 text-left whitespace-nowrap overflow-hidden text-ellipsis mt-5 mb-3"
+              style="font-size: clamp(1.25rem, 2vw, 1.875rem);"
+            >
+              {{ pack.name }}
+            </h2>
+
+            <p class="text-white/30 max-w-8/9 italic text-base font-semibold line-clamp-3">
+              {{ pack.description }}
+            </p>
+          </SwiperSlide>
+        </template>
+
+        <template v-else>
+          <SwiperSlide
+            v-for="n in skeletonCount"
+            :key="`skeleton-${n}`"
+            class="animate-pulse"
+          >
+            <div class="rounded-sm overflow-hidden bg-white h-[500px] w-full" />
+            <div class="mt-5 mb-3 h-6 bg-white rounded w-3/4" />
+            <div class="h-4 bg-white rounded w-full" />
+          </SwiperSlide>
+        </template>
       </Swiper>
     </div>
 

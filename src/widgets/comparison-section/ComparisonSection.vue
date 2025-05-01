@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import type { Swiper as SwiperType } from 'swiper';
-import { DefaultButton } from '@/widgets/button';
+import { comparisons } from '@/shared/data/comparisons';
 
+import { DefaultButton } from '@/widgets/button';
 import { useMediaQuery } from '@vueuse/core';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { ref } from 'vue';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { comparisons } from '@/shared/data/comparisons';
 
 const isDesktop = useMediaQuery('(min-width: 1023px)');
 

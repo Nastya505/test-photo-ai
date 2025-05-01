@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import type { Swiper as SwiperType } from 'swiper';
+import { DefaultButton } from '@/widgets/button';
 import { useMediaQuery } from '@vueuse/core';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { computed, ref } from 'vue';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { DefaultButton } from '@/widgets/button';
 
 const billingCycle = ref<'monthly' | 'yearly'>('yearly');
 

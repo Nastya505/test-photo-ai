@@ -1,13 +1,10 @@
 <script setup lang="ts">
+import { questions } from '@/shared/data/faq';
 import { ref } from 'vue';
 
 defineProps<{
   sectionTitle: string;
   imageSrc: string;
-  questions: {
-    title: string;
-    content: string;
-  }[];
 }>();
 
 const activePanels = ref<string[]>(['0']);
@@ -30,7 +27,7 @@ const activePanels = ref<string[]>(['0']);
         </AccordionPanel>
       </Accordion>
     </div>
-    <div class="overflow-hidden rounded-lg max-w-[700px]">
+    <div class="hidden md:block overflow-hidden rounded-lg max-w-[700px]">
       <Image :src="imageSrc" alt="Photo FAQ" class="w-full h-auto object-cover" />
     </div>
   </div>

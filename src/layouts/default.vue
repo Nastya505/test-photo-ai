@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Footer } from '@/widgets/footer';
 import { Header } from '@/widgets/header';
 </script>
 
@@ -10,6 +11,7 @@ import { Header } from '@/widgets/header';
       <div>
         <slot />
       </div>
+      <Footer />
     </div>
   </div>
 </template>

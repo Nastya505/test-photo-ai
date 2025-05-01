@@ -4,6 +4,7 @@ import { DefaultButton } from '@/widgets/button';
 import { FAQSection } from '@/widgets/FAQ';
 import { Gallery } from '@/widgets/gallery';
 import { DefaultBlockImage, PerfectShotSection, TableImagesBlock, TwoColTextAndImageBlock } from '@/widgets/imageBlock';
+import { TrustpilotWithImage, TrustpilotWithReviews } from '@/widgets/trustpilot';
 </script>
 
 <template>
@@ -18,6 +19,13 @@ import { DefaultBlockImage, PerfectShotSection, TableImagesBlock, TwoColTextAndI
     </div>
     <DefaultButton text="Create Perfect Shot" link="/pricing" />
   </div>
+  <TrustpilotWithReviews title="Customers can’t stop raving about their Headshots" button-text="Create Perfect Shot" />
+  <TrustpilotWithImage title="Start taking AI photos now" description="Generate photorealistic images and videos of people with AI. Take stunning photos of people with the first AI Photographer! Generate photo and video content for your social media with AI. Save time and money and do an AI photo" button-text="Create Perfect Shot" />
+  <TableImagesBlock class="my-40" />
+  <TwoColTextAndImageBlock class="my-40" fs-class-title="text-6xl" title="Crazy detailed AI image generator" img-url="/images/photo-details.webp" />
+  <TwoColTextAndImageBlock class="my-40" title="Just upload your photo, choose style and if you want some parameters" img-url="/images/photo-selection.webp" />
+  <DefaultBlockImage class="my-40" title="Best platform for your perfect Headshots" img-url="/images/preview-photo-ai.webp" />
+  <DefaultBlockImage class="my-40" title="Create video clips with AI" subtitle="Take any AI photo you generated, and turn it into a video by tapping [ Make video ]. A few minutes later you have a short video clip of the photo giving you an immersive virtual reality like experience." img-url="/images/preview-guide-photo-ai.webp" />
   <div class="flex flex-col gap-12 md:gap-34">
     <Gallery class="mt-8" id="gallery" />
     <DefaultBlockImage  title="Best platform for your perfect Headshots" img-url="/images/preview-photo-ai.webp" />
@@ -33,7 +41,6 @@ import { DefaultBlockImage, PerfectShotSection, TableImagesBlock, TwoColTextAndI
       { title: 'I can’t login to Headshot AI', content: 'yes' },
       { title: 'How do I cancel my subscription?', content: 'yes' },
       { title: 'I canceled Headshot AI but am still being charged', content: 'yes' },
-    ]"
     />
     <BlockPricing id="pricing" />
   </div>

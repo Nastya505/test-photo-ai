@@ -260,6 +260,8 @@ watch(isDesktop, (value) => {
   .swiper-pagination-bullet {
     background: white;
     opacity: 0.4;
+    width:62px;
+    border-radius: 10px;
   }
   .swiper-pagination-bullet-active {
     opacity: 1;

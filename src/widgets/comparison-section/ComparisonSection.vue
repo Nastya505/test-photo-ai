@@ -87,7 +87,7 @@ watch(isDesktop, (value) => {
       </SwiperSlide>
     </Swiper>
 
-    <DefaultButton class="mt-6 md:mt-12" text="Create Perfect Shot" link="/pricing" />
+    <DefaultButton class="mt-6 md:mt-12" text="Create Perfect Shot" link="#pricing" />
   </div>
 </template>
 

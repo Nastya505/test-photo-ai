@@ -82,7 +82,7 @@ watch(() => categoryContainer.value, () => checkOverflow());
 </script>
 
 <template>
-  <div class="flex flex-col gap-8">
+  <section id="gallery" class="flex flex-col gap-8">
     <!-- Category filter -->
     <div
       v-if="!isLoading && categories.length"
@@ -128,6 +128,6 @@ watch(() => categoryContainer.value, () => checkOverflow());
       <div v-if="!isLoading" class="absolute bottom-24 left-0 right-0 h-32 bg-gradient-to-t from-[#040406] to-transparent z-10" />
     </div>
 
-    <DefaultButton v-if="!isLoading" class="mx-auto -mt-20 z-11" text="Create Perfect Shot" link="/pricing" />
-  </div>
+    <DefaultButton v-if="!isLoading" class="mx-auto -mt-20 z-11" text="Create Perfect Shot" link="#pricing" />
+  </section>
 </template>

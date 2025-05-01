@@ -35,11 +35,10 @@ const props = withDefaults(
         {{ props.subtitle }}
       </h3>
     </div>
-<div class="overflow-hidden rounded-sm w-full"  :class="[props.orderImage === '1' ? 'order-1 md:order-2 ' : 'order-2 md:order-1']"
->
-    <Image
-      :src="props.imgUrl"
-    />
-  </div>
+    <div class="overflow-hidden rounded-sm w-full" :class="[props.orderImage === '1' ? 'order-1 md:order-2 ' : 'order-2 md:order-1']">
+      <Image
+        :src="props.imgUrl"
+      />
+    </div>
   </div>
 </template>

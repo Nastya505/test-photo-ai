@@ -38,6 +38,5 @@ export default defineNuxtConfig({
   },
   routeRules: {
     '/create': { redirect: 'https://photoai.artlogo.co/' },
-    '/pricing': { redirect: '/#pricing' },
   },
 });

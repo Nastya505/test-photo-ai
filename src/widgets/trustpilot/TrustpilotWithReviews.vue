@@ -20,7 +20,7 @@ defineProps<{
         <img src="/images/trustpilot-logo-white.svg" alt="Trustpilot Logo" class="h-8">
         <span class="text-xl font-bold leading-6 text-white/50">4.9 Excellent</span>
       </div>
-      <DefaultButton link="/pricing" :text="buttonText" class="!hidden md:!flex max-w-full mt-12 sm:max-w-62" />
+      <DefaultButton link="#pricing" :text="buttonText" class="!hidden md:!flex max-w-full mt-12 sm:max-w-62" />
     </div>
 
     <!-- Right Side -->
@@ -37,6 +37,6 @@ defineProps<{
         Read all 296 reviews on TrustPilot
       </a>
     </div>
-    <DefaultButton link="/pricing" :text="buttonText" class="!flex md:!hidden" />
+    <DefaultButton link="#pricing" :text="buttonText" class="!flex md:!hidden" />
   </section>
 </template>

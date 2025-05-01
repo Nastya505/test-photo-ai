@@ -24,7 +24,7 @@ async function copyToClipboard(text: string) {
       <div>
         <DefaultButton
           class="mb-5"
-          text="Create Perfect Shot" link="/pricing"
+          text="Create Perfect Shot" link="#pricing"
         />
         <div class="relative w-full group flex justify-start gap-4 items-start">
           <p class="text-white/30 max-w-96 italic text-base font-semibold line-clamp-5">

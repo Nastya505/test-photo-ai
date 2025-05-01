@@ -7,7 +7,13 @@ defineProps<{
   buttonText: string;
 }>();
 
-const cards = [
+interface Card {
+  name: string;
+  emojiUrl: string;
+  text: string;
+}
+
+const cards: Card[] = [
   {
     name: 'Josh',
     emojiUrl: '/images/icon-heart.png',

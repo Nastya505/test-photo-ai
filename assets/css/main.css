@@ -6,4 +6,5 @@
 body {
   font-family: "IBM Plex Sans", sans-serif;
   background-color: #040406;
+  overflow-x: hidden;
 }

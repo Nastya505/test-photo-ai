@@ -8,7 +8,7 @@ defineProps<{
 <template>
   <div
     v-if="text !== null && text !== undefined"
-    class="flex flex-col w-full gap-2 justify-start items-start"
+    class="flex flex-col w-full md:w-8/9 gap-2 justify-start items-start"
   >
     <h5 class="text-left text-lg font-semibold text-white">
       {{ title }}

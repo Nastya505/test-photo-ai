@@ -158,7 +158,7 @@ async function downloadImage() {
             <ResultLine title="Model" :text="currentPhoto.model.name" />
             <ResultLine title="Preset" :text="currentPhoto.prompt_pack?.name" />
             <ResultLine title="License" text="Free to use with backlink to ArtPhoto Ai" />
-            <button @click="downloadImage()" class="flex items-center gap-2 text-white relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:bg-white after:opacity-100 hover:after:opacity-50">
+            <button @click="downloadImage()" class="cursor-pointer flex items-center gap-2 text-white relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:bg-white after:opacity-100 hover:after:opacity-50">
               <span class="text-lg text-white font-semibold">
                 Download image
               </span>

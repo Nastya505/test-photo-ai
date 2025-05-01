@@ -17,7 +17,7 @@ const props = withDefaults(
   },
 );
 
-const baseClasses = 'inline-flex items-center justify-center gap-2 rounded-full leading-5 transition-all duration-200';
+const baseClasses = 'cursor-pointer inline-flex items-center justify-center gap-2 rounded-full leading-5 transition-all duration-200';
 
 const variantClasses = {
   filled: 'bg-white px-8 py-4 text-lg  font-semibold  text-[#223] border border-white hover:bg-transparent hover:text-white  active:bg-transparent active:text-white',

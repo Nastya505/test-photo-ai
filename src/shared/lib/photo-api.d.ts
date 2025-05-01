@@ -4,557 +4,557 @@
  */
 
 export interface paths {
-    "/internal/v1/train_model": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Train a new model */
-        post: operations["train_model_internal_v1_train_model_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+  '/internal/v1/train_model': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/internal/v1/generate_photo": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Generate photos */
-        post: operations["generate_photo_internal_v1_generate_photo_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    /** Train a new model */
+    post: operations['train_model_internal_v1_train_model_post'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/internal/v1/generate_photo': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/public/v1/get-examples": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Get example photos with model data */
-        get: operations["get_examples_public_v1_get_examples_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    /** Generate photos */
+    post: operations['generate_photo_internal_v1_generate_photo_post'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/public/v1/get-examples': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/internal/v1/describe": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Describe Photo with ai */
-        post: operations["describe_photo_internal_v1_describe_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /** Get example photos with model data */
+    get: operations['get_examples_public_v1_get_examples_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/internal/v1/describe': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/public/v1/get-packs": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** List all prompt-packs (name, description, covers) */
-        get: operations["get_prompt_packs_public_v1_get_packs_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    /** Describe Photo with ai */
+    post: operations['describe_photo_internal_v1_describe_post'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/public/v1/get-packs': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
+    /** List all prompt-packs (name, description, covers) */
+    get: operations['get_prompt_packs_public_v1_get_packs_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
 }
 export type webhooks = Record<string, never>;
 export interface components {
-    schemas: {
-        /** DescribeRequest */
-        DescribeRequest: {
-            /**
-             * Image Url
-             * @description image for describe
-             */
-            image_url: string;
-            /**
-             * Type
-             * @description type of describe, e.g., 'person', 'animal', etc.
-             */
-            type: string;
-        };
-        /** DescribeResponse */
-        DescribeResponse: {
-            /** Age */
-            age?: number | null;
-            /** Ethnicity */
-            ethnicity?: string | null;
-            /** Eye Color */
-            eye_color?: string | null;
-            /** Bald */
-            bald?: string | null;
-            /** Hair Style */
-            hair_style?: string | null;
-            /** Hair Color */
-            hair_color?: string | null;
-            /** Beard */
-            beard?: string | null;
-            /** Height */
-            height?: string | null;
-            /** Body Type */
-            body_type?: string | null;
-            /** Chest */
-            chest?: string | null;
-            /** Hips */
-            hips?: string | null;
-        };
-        /** ExampleModelInfo */
-        ExampleModelInfo: {
-            /**
-             * Name
-             * @description Name of the model
-             */
-            name: string;
-            /**
-             * Cover Url
-             * @description URL of the model's cover image
-             */
-            cover_url: string;
-            /**
-             * Age
-             * @description Age of the model in years
-             */
-            age?: number | null;
-            /**
-             * Ethnicity
-             * @description Ethnic background of the model
-             */
-            ethnicity?: string | null;
-            /**
-             * Eye Color
-             * @description Color of the model's eyes
-             */
-            eye_color?: string | null;
-            /**
-             * Bald
-             * @description Indicates if the model is bald
-             */
-            bald?: string | null;
-            /**
-             * Hair Style
-             * @description Style of the model's hair
-             */
-            hair_style?: string | null;
-            /**
-             * Hair Color
-             * @description Color of the model's hair
-             */
-            hair_color?: string | null;
-            /**
-             * Beard
-             * @description Presence and style of the model's beard
-             */
-            beard?: string | null;
-            /**
-             * Height
-             * @description Height of the model
-             */
-            height?: string | null;
-            /**
-             * Body Type
-             * @description Body type of the model
-             */
-            body_type?: string | null;
-            /**
-             * Chest
-             * @description Chest measurements of the model
-             */
-            chest?: string | null;
-            /**
-             * Hips
-             * @description Hip measurements of the model
-             */
-            hips?: string | null;
-            /**
-             * Type
-             * @description Type/category of the model
-             */
-            type?: string | null;
-            /**
-             * Trigger Word
-             * @description Special word associated with this model
-             */
-            trigger_word?: string | null;
-        };
-        /** ExamplePhoto */
-        ExamplePhoto: {
-            /**
-             * Id
-             * @description Unique identifier of the photo
-             */
-            id: string;
-            /**
-             * Image Url
-             * @description URL of the photo image
-             */
-            image_url?: string | null;
-            /**
-             * Prompt
-             * @description Text prompt used to generate the photo
-             */
-            prompt: string;
-            /** @description Information about the model in the photo */
-            model: components["schemas"]["ExampleModelInfo"];
-            /** @description Optional information about the prompt pack used */
-            prompt_pack?: components["schemas"]["ExamplePromptPackInfo"] | null;
-            /**
-             * Blurhash
-             * @description Blurhash string for image preview
-             */
-            blurhash?: string | null;
-        };
-        /** ExamplePromptPackInfo */
-        ExamplePromptPackInfo: {
-            /**
-             * Id
-             * @description Unique identifier of the prompt pack
-             */
-            id: string;
-            /**
-             * Name
-             * @description Name of the prompt pack
-             */
-            name: string;
-            /**
-             * Description
-             * @description Detailed description of the prompt pack
-             */
-            description: string;
-        };
-        /** GeneratePhotoResponse */
-        GeneratePhotoResponse: {
-            /** Photos */
-            photos: {
-                [key: string]: unknown;
-            }[];
-        };
-        /** HTTPValidationError */
-        HTTPValidationError: {
-            /** Detail */
-            detail?: components["schemas"]["ValidationError"][];
-        };
-        /** ModelData */
-        ModelData: {
-            /** Cover Url */
-            cover_url: string;
-            /** Name */
-            name: string;
-            /** Trainpackageurl */
-            trainPackageUrl: string;
-            /** Age */
-            age?: number | null;
-            /** Ethnicity */
-            ethnicity?: string | null;
-            /** Eye Color */
-            eye_color?: string | null;
-            /** Bald */
-            bald?: string | null;
-            /** Hair Style */
-            hair_style?: string | null;
-            /** Hair Color */
-            hair_color?: string | null;
-            /** Beard */
-            beard?: string | null;
-            /** Height */
-            height?: string | null;
-            /** Body Type */
-            body_type?: string | null;
-            /** Chest */
-            chest?: string | null;
-            /** Hips */
-            hips?: string | null;
-            /** Type */
-            type?: string | null;
-        };
-        /** PhotoData */
-        PhotoData: {
-            /**
-             * Model Id
-             * @description ID of the model to be used for generation
-             */
-            model_id: string;
-            /**
-             * Prompt
-             * @description Descriptive prompt for the image
-             */
-            prompt: string;
-            /**
-             * Prompt Pack Id
-             * @description ID of the prompt pack to be used
-             */
-            prompt_pack_id?: string | null;
-            /**
-             * Ai Improve Prompt
-             * @description If true, AI will enhance the prompt automatically
-             * @default true
-             */
-            ai_improve_prompt: boolean | null;
-            /**
-             * Quantity
-             * @description Number of images to generate (1 to 100)
-             * @default 1
-             */
-            quantity: number | null;
-            /**
-             * Creativity
-             * @description Creativity level between 0 and 1
-             * @default 0.5
-             */
-            creativity: number | null;
-            /**
-             * Style
-             * @description Photo style, e.g., VHS, black and white, FujiFilm
-             */
-            style?: string | null;
-            /**
-             * Emotion
-             * @description Emotion of the photo, e.g., happy, sad, angry
-             */
-            emotion?: string | null;
-            /**
-             * Camera
-             * @description Camera angle/type, e.g., close up, wide angle, fisheye
-             */
-            camera?: string | null;
-            /**
-             * Lighting
-             * @description Lighting setup, e.g., natural, studio, low light
-             */
-            lighting?: string | null;
-            /**
-             * Place
-             * @description Photo location, e.g., beach, city, forest
-             */
-            place?: string | null;
-        };
-        /**
-         * PromptPack
-         * @description What we expose to the client for each prompt-pack.
-         */
-        PromptPack: {
-            /**
-             * Name
-             * @description Pack title shown to users
-             */
-            name: string;
-            /**
-             * Description
-             * @description Short marketing blurb
-             */
-            description?: string | null;
-            /**
-             * Covers
-             * @description Array of cover-image URLs (can be empty)
-             */
-            covers?: string[] | null;
-        };
-        /** TrainModelResponse */
-        TrainModelResponse: {
-            /** Model */
-            model: {
-                [key: string]: unknown;
-            };
-        };
-        /** ValidationError */
-        ValidationError: {
-            /** Location */
-            loc: (string | number)[];
-            /** Message */
-            msg: string;
-            /** Error Type */
-            type: string;
-        };
+  schemas: {
+    /** DescribeRequest */
+    DescribeRequest: {
+      /**
+       * Image Url
+       * @description image for describe
+       */
+      image_url: string;
+      /**
+       * Type
+       * @description type of describe, e.g., 'person', 'animal', etc.
+       */
+      type: string;
     };
-    responses: never;
-    parameters: never;
-    requestBodies: never;
-    headers: never;
-    pathItems: never;
+    /** DescribeResponse */
+    DescribeResponse: {
+      /** Age */
+      age?: number | null;
+      /** Ethnicity */
+      ethnicity?: string | null;
+      /** Eye Color */
+      eye_color?: string | null;
+      /** Bald */
+      bald?: string | null;
+      /** Hair Style */
+      hair_style?: string | null;
+      /** Hair Color */
+      hair_color?: string | null;
+      /** Beard */
+      beard?: string | null;
+      /** Height */
+      height?: string | null;
+      /** Body Type */
+      body_type?: string | null;
+      /** Chest */
+      chest?: string | null;
+      /** Hips */
+      hips?: string | null;
+    };
+    /** ExampleModelInfo */
+    ExampleModelInfo: {
+      /**
+       * Name
+       * @description Name of the model
+       */
+      name: string;
+      /**
+       * Cover Url
+       * @description URL of the model's cover image
+       */
+      cover_url: string;
+      /**
+       * Age
+       * @description Age of the model in years
+       */
+      age?: number | null;
+      /**
+       * Ethnicity
+       * @description Ethnic background of the model
+       */
+      ethnicity?: string | null;
+      /**
+       * Eye Color
+       * @description Color of the model's eyes
+       */
+      eye_color?: string | null;
+      /**
+       * Bald
+       * @description Indicates if the model is bald
+       */
+      bald?: string | null;
+      /**
+       * Hair Style
+       * @description Style of the model's hair
+       */
+      hair_style?: string | null;
+      /**
+       * Hair Color
+       * @description Color of the model's hair
+       */
+      hair_color?: string | null;
+      /**
+       * Beard
+       * @description Presence and style of the model's beard
+       */
+      beard?: string | null;
+      /**
+       * Height
+       * @description Height of the model
+       */
+      height?: string | null;
+      /**
+       * Body Type
+       * @description Body type of the model
+       */
+      body_type?: string | null;
+      /**
+       * Chest
+       * @description Chest measurements of the model
+       */
+      chest?: string | null;
+      /**
+       * Hips
+       * @description Hip measurements of the model
+       */
+      hips?: string | null;
+      /**
+       * Type
+       * @description Type/category of the model
+       */
+      type?: string | null;
+      /**
+       * Trigger Word
+       * @description Special word associated with this model
+       */
+      trigger_word?: string | null;
+    };
+    /** ExamplePhoto */
+    ExamplePhoto: {
+      /**
+       * Id
+       * @description Unique identifier of the photo
+       */
+      id: string;
+      /**
+       * Image Url
+       * @description URL of the photo image
+       */
+      image_url?: string | null;
+      /**
+       * Prompt
+       * @description Text prompt used to generate the photo
+       */
+      prompt: string;
+      /** @description Information about the model in the photo */
+      model: components['schemas']['ExampleModelInfo'];
+      /** @description Optional information about the prompt pack used */
+      prompt_pack?: components['schemas']['ExamplePromptPackInfo'] | null;
+      /**
+       * Blurhash
+       * @description Blurhash string for image preview
+       */
+      blurhash?: string | null;
+    };
+    /** ExamplePromptPackInfo */
+    ExamplePromptPackInfo: {
+      /**
+       * Id
+       * @description Unique identifier of the prompt pack
+       */
+      id: string;
+      /**
+       * Name
+       * @description Name of the prompt pack
+       */
+      name: string;
+      /**
+       * Description
+       * @description Detailed description of the prompt pack
+       */
+      description: string;
+    };
+    /** GeneratePhotoResponse */
+    GeneratePhotoResponse: {
+      /** Photos */
+      photos: {
+        [key: string]: unknown;
+      }[];
+    };
+    /** HTTPValidationError */
+    HTTPValidationError: {
+      /** Detail */
+      detail?: components['schemas']['ValidationError'][];
+    };
+    /** ModelData */
+    ModelData: {
+      /** Cover Url */
+      cover_url: string;
+      /** Name */
+      name: string;
+      /** Trainpackageurl */
+      trainPackageUrl: string;
+      /** Age */
+      age?: number | null;
+      /** Ethnicity */
+      ethnicity?: string | null;
+      /** Eye Color */
+      eye_color?: string | null;
+      /** Bald */
+      bald?: string | null;
+      /** Hair Style */
+      hair_style?: string | null;
+      /** Hair Color */
+      hair_color?: string | null;
+      /** Beard */
+      beard?: string | null;
+      /** Height */
+      height?: string | null;
+      /** Body Type */
+      body_type?: string | null;
+      /** Chest */
+      chest?: string | null;
+      /** Hips */
+      hips?: string | null;
+      /** Type */
+      type?: string | null;
+    };
+    /** PhotoData */
+    PhotoData: {
+      /**
+       * Model Id
+       * @description ID of the model to be used for generation
+       */
+      model_id: string;
+      /**
+       * Prompt
+       * @description Descriptive prompt for the image
+       */
+      prompt: string;
+      /**
+       * Prompt Pack Id
+       * @description ID of the prompt pack to be used
+       */
+      prompt_pack_id?: string | null;
+      /**
+       * Ai Improve Prompt
+       * @description If true, AI will enhance the prompt automatically
+       * @default true
+       */
+      ai_improve_prompt: boolean | null;
+      /**
+       * Quantity
+       * @description Number of images to generate (1 to 100)
+       * @default 1
+       */
+      quantity: number | null;
+      /**
+       * Creativity
+       * @description Creativity level between 0 and 1
+       * @default 0.5
+       */
+      creativity: number | null;
+      /**
+       * Style
+       * @description Photo style, e.g., VHS, black and white, FujiFilm
+       */
+      style?: string | null;
+      /**
+       * Emotion
+       * @description Emotion of the photo, e.g., happy, sad, angry
+       */
+      emotion?: string | null;
+      /**
+       * Camera
+       * @description Camera angle/type, e.g., close up, wide angle, fisheye
+       */
+      camera?: string | null;
+      /**
+       * Lighting
+       * @description Lighting setup, e.g., natural, studio, low light
+       */
+      lighting?: string | null;
+      /**
+       * Place
+       * @description Photo location, e.g., beach, city, forest
+       */
+      place?: string | null;
+    };
+    /**
+     * PromptPack
+     * @description What we expose to the client for each prompt-pack.
+     */
+    PromptPack: {
+      /**
+       * Name
+       * @description Pack title shown to users
+       */
+      name: string;
+      /**
+       * Description
+       * @description Short marketing blurb
+       */
+      description?: string | null;
+      /**
+       * Covers
+       * @description Array of cover-image URLs (can be empty)
+       */
+      covers?: string[] | null;
+    };
+    /** TrainModelResponse */
+    TrainModelResponse: {
+      /** Model */
+      model: {
+        [key: string]: unknown;
+      };
+    };
+    /** ValidationError */
+    ValidationError: {
+      /** Location */
+      loc: (string | number)[];
+      /** Message */
+      msg: string;
+      /** Error Type */
+      type: string;
+    };
+  };
+  responses: never;
+  parameters: never;
+  requestBodies: never;
+  headers: never;
+  pathItems: never;
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    train_model_internal_v1_train_model_post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["ModelData"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["TrainModelResponse"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
+  train_model_internal_v1_train_model_post: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    generate_photo_internal_v1_generate_photo_post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["PhotoData"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GeneratePhotoResponse"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['ModelData'];
+      };
     };
-    get_examples_public_v1_get_examples_get: {
-        parameters: {
-            query?: {
-                limit?: number | null;
-                shuffle?: boolean | null;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
+    responses: {
+      /** @description Successful Response */
+      201: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ExamplePhoto"][];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
+        content: {
+          'application/json': components['schemas']['TrainModelResponse'];
         };
+      };
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
     };
-    describe_photo_internal_v1_describe_post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["DescribeRequest"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["DescribeResponse"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
+  };
+  generate_photo_internal_v1_generate_photo_post: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    get_prompt_packs_public_v1_get_packs_get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PromptPack"][];
-                };
-            };
-        };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['PhotoData'];
+      };
     };
+    responses: {
+      /** @description Successful Response */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['GeneratePhotoResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  get_examples_public_v1_get_examples_get: {
+    parameters: {
+      query?: {
+        limit?: number | null;
+        shuffle?: boolean | null;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ExamplePhoto'][];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  describe_photo_internal_v1_describe_post: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['DescribeRequest'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['DescribeResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  get_prompt_packs_public_v1_get_packs_get: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['PromptPack'][];
+        };
+      };
+    };
+  };
 }

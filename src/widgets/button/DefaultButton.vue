@@ -7,13 +7,13 @@ const props = withDefaults(
     variant?: 'filled' | 'outlined';
     icon?: string | null;
     styles?: string;
-    positionIcon?:'left'|'right'
+    positionIcon?: 'left' | 'right';
   }>(),
   {
     variant: 'filled',
     component: 'a',
     icon: null,
-    positionIcon:'right'
+    positionIcon: 'right',
   },
 );
 
@@ -24,6 +24,7 @@ const variantClasses = {
   outlined: 'bg-transparent px-4 py-2 text-base font-medium text-white border border-white hover:bg-white hover:text-[#223]  active:bg-white active:text-[#223]',
 };
 </script>
+
 <template>
   <component
     :is="props.component"
@@ -44,4 +45,3 @@ const variantClasses = {
     />
   </component>
 </template>
-

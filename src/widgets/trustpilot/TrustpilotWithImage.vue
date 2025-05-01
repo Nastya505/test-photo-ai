@@ -22,7 +22,7 @@ defineProps<{
         <div class="text-black/80 mb-6 text-base font-medium max-w-[460px] leading-5">
           {{ description }}
         </div>
-        <DefaultButton link="/pricing" :text="buttonText" class="max-w-full sm:max-w-62 !invert" />
+        <DefaultButton link="#pricing" :text="buttonText" class="max-w-full sm:max-w-62 !invert" />
       </div>
 
       <div class="w-full p-4 md:p-0 md:w-1/2 relative overflow-hidden h-full">

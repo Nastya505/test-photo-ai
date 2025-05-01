@@ -112,7 +112,7 @@ async function downloadImage() {
 </script>
 
 <template>
-  
+  <div class="container mx-auto px-3 md:px-0">
   <div v-if="isLoading" class="text-center flex flex-col gap-4 justify-center items-center h-[80vh]">
     <i class="pi pi-spin pi-spinner" style="font-size: 2rem" />
     <span>Loading</span>
@@ -154,7 +154,7 @@ async function downloadImage() {
           </div>
           <div class="flex flex-col w-full md:w-3/5 justify-start items-start gap-8">
             <ResultLine title="Prompt" :text="currentPhoto.prompt" />
-            <DefaultButton text="Try this prompt" link="/pricing" icon="pi-arrow-circle-right" />
+            <DefaultButton text="Try this prompt" link="/#pricing" icon="pi-arrow-circle-right" />
             <ResultLine title="Model" :text="currentPhoto.model.name" />
             <ResultLine title="Preset" :text="currentPhoto.prompt_pack?.name" />
             <ResultLine title="License" text="Free to use with backlink to ArtPhoto Ai" />
@@ -197,7 +197,8 @@ async function downloadImage() {
         title="Just upload your photo, choose style and if you want some parameters"
         img-url="/images/photo-selection.webp"
       />
-      <DefaultButton class="mb-32" text="Start generate your photos" link="/pricing" icon="pi-step-forward" />
+      <DefaultButton class="mb-32" text="Start generate your photos" link="#pricing" icon="pi-step-forward" />
     </div>
+  </div>  
   </div>
 </template>

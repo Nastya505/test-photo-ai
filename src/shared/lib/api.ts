@@ -14,3 +14,12 @@ export async function getExamples() {
 
   return data;
 }
+export async function getPacks() {
+  const { data, error } = await client.GET('/public/v1/get-packs');
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+}

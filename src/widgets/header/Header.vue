@@ -9,7 +9,7 @@ const hasScrolled = computed(() => y.value > 0);
 
 const navLinks = [
   { label: 'Pricing', href: '#pricing' },
-  { label: 'Billing', href: '#' },
+  { label: 'Billing', href: '#billing' },
   { label: 'Gallery', href: '#gallery' },
 ];
 
@@ -63,7 +63,7 @@ onUnmounted(() => {
           {{ link.label }}
         </a>
       </div>
-      <DefaultButton text="Create Perfect Shot" link="/pricing" variant="outlined" />
+      <DefaultButton text="Create Perfect Shot" link="/#pricing" variant="outlined" />
     </nav>
 
     <!-- Mobile Menu Button -->
@@ -99,7 +99,7 @@ onUnmounted(() => {
           {{ link.label }}
         </a>
 
-        <DefaultButton class="z-50 scale-150 ml-8" text="Create Perfect Shot" link="/pricing" variant="outlined" />
+        <DefaultButton class="z-50 scale-150 ml-8" text="Create Perfect Shot" link="#pricing" variant="outlined" />
         <Image class="absolute -bottom-64 right-0 z-40" src="/images/menu-effect.png" alt="logo" width="770" />
       </div>
     </transition>

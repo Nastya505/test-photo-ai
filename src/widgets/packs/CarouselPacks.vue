@@ -5,84 +5,30 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import { ref } from 'vue';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import type { components } from '@/shared/lib/photo-api';
+import { getPacks } from '@/shared/lib/api';
 
 const modules = [Navigation];
 const swiperRef = ref<any>(null);
 const isBeginning = ref(true);
 const isEnd = ref(false);
+const isLoading = ref(true);
+const skeletonCount = 5;
+const packs = ref<components['schemas']['PromptPack'][]>([]);
 
-const packs = [
-  {
-    name: 'LinkedIn headshots (man)',
-    description: 'Your LinkedIn profile is your digital first impression—make it count with a studio-quality professional headshot that enhances your credibility and personal brand. Photo AI helps you create polished, high-quality headshots that meet the standards of recruiters, hiring managers, and business professionals. Upgrade your LinkedIn profile with a professional, career-boosting headshot today',
-    covers: [
-      'https://cwpufmhbzuumfwmqcrll.supabase.co/storage/v1/object/public/covers/prompt-covers/eiv6v4wmdqv.webp',
-      'https://cwpufmhbzuumfwmqcrll.supabase.co/storage/v1/object/public/covers/prompt-covers/lg0a9436mik.webp',
-    ],
-  },
-  {
-    name: 'AI Selfies (man)',
-    description: 'Create AI-generated selfies that capture your best angles and expressions. Personalize your look with unique styles and settings, giving you perfect selfies every time without the hassle',
-    covers: [
-      'https://cwpufmhbzuumfwmqcrll.supabase.co/storage/v1/object/public/covers/prompt-covers/n14l8sc5by.webp',
-      'https://cwpufmhbzuumfwmqcrll.supabase.co/storage/v1/object/public/covers/prompt-covers/4uys4on5rsk.webp',
-    ],
-  },
-  {
-    name: 'Easter (man)',
-    description: 'Hop into the spirit of Easter with a joyful and colorful photo shoot. Capture the fun of the season with bunny ears, Easter eggs, and bright spring colors for a cheerful, family-friendly look',
-    covers: [
-      'https://cwpufmhbzuumfwmqcrll.supabase.co/storage/v1/object/public/covers/prompt-covers/q13ef65ii3i.webp',
-      'https://cwpufmhbzuumfwmqcrll.supabase.co/storage/v1/object/public/covers/prompt-covers/8l7wvszcxjp.webp',
-    ],
-  },
-  {
-    name: 'Instagram (man)',
-    description: 'Take engaging and visually stunning photos that showcase your personality as an Instagram influencer. Boost your confidence, likes and followers with captivating images that reflect your unique style and charisma',
-    covers: [
-      'https://cwpufmhbzuumfwmqcrll.supabase.co/storage/v1/object/public/covers/prompt-covers/9cs5u4may6.webp',
-    ],
-  },
-  {
-    name: 'Tinder (man)',
-    description: 'Look your best while staying true to who you are. Take photos with a variety of poses, playful expressions, and vibrant colors to make your dating profile stand out. Attract more matches on apps like Tinder, Bumble, and Hinge by showcasing your unique personality and style, helping you create a more engaging and appealing profile',
-    covers: [
-      'https://cwpufmhbzuumfwmqcrll.supabase.co/storage/v1/object/public/covers/prompt-covers/wo9agnxumfi.webp',
-      'https://cwpufmhbzuumfwmqcrll.supabase.co/storage/v1/object/public/covers/prompt-covers/lzqryle3rb.webp',
-      'https://cwpufmhbzuumfwmqcrll.supabase.co/storage/v1/object/public/covers/prompt-covers/dcf4u4nqnv7.webp',
-    ],
-  },
-  {
-    name: 'Tinder (man)',
-    description: 'Look your best while staying true to who you are. Take photos with a variety of poses, playful expressions, and vibrant colors to make your dating profile stand out. Attract more matches on apps like Tinder, Bumble, and Hinge by showcasing your unique personality and style, helping you create a more engaging and appealing profile',
-    covers: [
-      'https://cwpufmhbzuumfwmqcrll.supabase.co/storage/v1/object/public/covers/prompt-covers/wo9agnxumfi.webp',
-      'https://cwpufmhbzuumfwmqcrll.supabase.co/storage/v1/object/public/covers/prompt-covers/lzqryle3rb.webp',
-      'https://cwpufmhbzuumfwmqcrll.supabase.co/storage/v1/object/public/covers/prompt-covers/dcf4u4nqnv7.webp',
-    ],
-  },
-  {
-    name: 'Tinder (man)',
-    description: 'Look your best while staying true to who you are. Take photos with a variety of poses, playful expressions, and vibrant colors to make your dating profile stand out. Attract more matches on apps like Tinder, Bumble, and Hinge by showcasing your unique personality and style, helping you create a more engaging and appealing profile',
-    covers: [
-      'https://cwpufmhbzuumfwmqcrll.supabase.co/storage/v1/object/public/covers/prompt-covers/wo9agnxumfi.webp',
-      'https://cwpufmhbzuumfwmqcrll.supabase.co/storage/v1/object/public/covers/prompt-covers/lzqryle3rb.webp',
-      'https://cwpufmhbzuumfwmqcrll.supabase.co/storage/v1/object/public/covers/prompt-covers/dcf4u4nqnv7.webp',
-    ],
-  },
-  {
-    name: 'Tinder (man)',
-    description: 'Look your best while staying true to who you are. Take photos with a variety of poses, playful expressions, and vibrant colors to make your dating profile stand out. Attract more matches on apps like Tinder, Bumble, and Hinge by showcasing your unique personality and style, helping you create a more engaging and appealing profile',
-    covers: [
-      'https://cwpufmhbzuumfwmqcrll.supabase.co/storage/v1/object/public/covers/prompt-covers/wo9agnxumfi.webp',
-      'https://cwpufmhbzuumfwmqcrll.supabase.co/storage/v1/object/public/covers/prompt-covers/lzqryle3rb.webp',
-      'https://cwpufmhbzuumfwmqcrll.supabase.co/storage/v1/object/public/covers/prompt-covers/dcf4u4nqnv7.webp',
-    ],
-  },
-];
-
+onMounted(async () => {
+  packs.value = await getPacks();
+  isLoading.value = false;
+  await nextTick();
+  updateNavState(); 
+});
+const validPacks = computed(() =>
+  packs.value.filter((p): p is typeof p & { covers: string[] } =>
+    Array.isArray(p.covers) && p.covers.length > 0
+  )
+);
 const visibleSlides = ref(1);
-const totalSlides = ref(packs.length);
+const totalSlides = computed(() => validPacks.value.length);
 
 function onSwiper(swiper: any) {
   swiperRef.value = swiper;
@@ -120,7 +66,7 @@ function updateNavState() {
 <template>
   <div>
     <div class="px-3 flex flex-col gap-10 justify-center items-center">
-      <div class="flex flex-col gap-6 justify-center items-center mt-32">
+      <div class="flex flex-col gap-6 justify-center items-center">
         <h1 class="text-2xl sm:text-6xl text-white font-medium text-center">
           New photo packs every week
         </h1>
@@ -128,14 +74,14 @@ function updateNavState() {
           All packs included in your membership! You can try as many as you want.
         </h3>
       </div>
-      <DefaultButton text="See all photo packs" link="/pricing" />
+      <DefaultButton text="See all photo packs" link="#pricing" />
     </div>
     <div class="w-screen relative mt-9 md:mt-20">
       <Swiper
-        :modules="modules"
-        :slides-per-view="1.1"
-        :initial-slide="0"
-        :space-between="6"
+      :modules="modules"
+      :slides-per-view="1.1"
+      :initial-slide="0"
+      :space-between="6"
         :slides-offset-before="12"
         :slides-offset-after="12"
         :navigation="{
@@ -150,10 +96,11 @@ function updateNavState() {
         class="w-full"
         @swiper="onSwiper"
         @slide-change="updateNavState"
-      >
+        >
         <SwiperSlide
-          v-for="pack in packs"
-          :key="pack.name"
+        v-if="!isLoading"
+        v-for="pack in validPacks"
+        :key="pack.name"
           class="cursor-pointer group"
         >
           <div class="rounded-sm overflow-hidden">
@@ -174,6 +121,16 @@ function updateNavState() {
           <p class="text-white/30 max-w-8/9 italic text-base font-semibold line-clamp-3">
             {{ pack.description }}
           </p>
+        </SwiperSlide>
+        <SwiperSlide
+          v-else
+          v-for="n in skeletonCount"
+          :key="`skeleton-${n}`"
+          class="animate-pulse"
+        >
+          <div class="rounded-sm overflow-hidden bg-white h-[500px] w-full"></div>
+          <div class="mt-5 mb-3 h-6 bg-white rounded w-3/4"></div>
+          <div class="h-4 bg-white rounded w-full"></div>
         </SwiperSlide>
       </Swiper>
     </div>

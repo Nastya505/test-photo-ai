@@ -14,7 +14,7 @@ const activePanels = ref<string[]>(['0']);
 </script>
 
 <template>
-  <section class="py-12">
+  <section>
     <div class="flex flex-col md:flex-row w justify-between items-start gap-8">
       <div class="card w-full max-w-[700px]">
         <h2 class="text-6xl text-left font-medium mb-10">
@@ -31,7 +31,7 @@ const activePanels = ref<string[]>(['0']);
           </AccordionPanel>
         </Accordion>
       </div>
-      <div class="overflow-hidden rounded-lg max-w-[700px]">
+      <div class="hidden md:block overflow-hidden rounded-lg max-w-[700px]">
         <Image :src="imageSrc" alt="Photo FAQ" class="w-full h-auto object-cover" />
       </div>
     </div>

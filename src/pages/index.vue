@@ -2,7 +2,7 @@
 import { DefaultButton } from '@/widgets/button';
 import { BlockPricing } from '@/widgets/block-pricing';
 import { FAQSection } from '@/widgets/FAQ';
-import { DefaultBlockImage, PerfectShotSection, TableImagesBlock, TwoColTextAndImageBlock } from '@/widgets/imageBlock';
+import { ImageBlock, VideoBlock, PerfectShotSection, TableImagesBlock, TwoColTextAndImageBlock } from '@/widgets/media-blocks';
 </script>
 
 <template>
@@ -20,8 +20,8 @@ import { DefaultBlockImage, PerfectShotSection, TableImagesBlock, TwoColTextAndI
   <TableImagesBlock class="my-40" />
   <TwoColTextAndImageBlock class="my-40" fs-class-title="text-6xl" title="Crazy detailed AI image generator" img-url="/images/photo-details.webp" />
   <TwoColTextAndImageBlock class="my-40" title="Just upload your photo, choose style and if you want some parameters" img-url="/images/photo-selection.webp" />
-  <DefaultBlockImage class="my-40" title="Best platform for your perfect Headshots" img-url="/images/preview-photo-ai.webp" />
-  <DefaultBlockImage class="my-40" title="Create video clips with AI" subtitle="Take any AI photo you generated, and turn it into a video by tapping [ Make video ]. A few minutes later you have a short video clip of the photo giving you an immersive virtual reality like experience." img-url="/images/preview-guide-photo-ai.webp" />
+  <ImageBlock  class="my-40" title="Best platform for your perfect Headshots" url="/images/preview-photo-ai.webp" />
+  <VideoBlock class="my-40" title="Create video clips with AI" subtitle="Take any AI photo you generated, and turn it into a video by tapping [ Make video ]. A few minutes later you have a short video clip of the photo giving you an immersive virtual reality like experience." url="/create-video.mp4" />
   <BlockPricing />
   <FAQSection
     class="my-40"

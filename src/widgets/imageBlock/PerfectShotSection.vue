@@ -13,7 +13,7 @@ async function copyToClipboard(text: string) {
 </script>
 
 <template>
-  <section class="flex flex-col md:flex-row items-stretch justify-between gap-10 py-20">
+  <section class="flex flex-col md:flex-row items-stretch justify-between gap-10">
     <div class="overflow-hidden rounded-xl max-w-[700px]">
       <Image :src="imageUrl" alt="Perfect Headshot" class="w-full h-auto object-cover" />
     </div>

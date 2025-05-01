@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import { computed, ref } from 'vue';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { DefaultButton } from '@/widgets/button';
 
 const billingCycle = ref<'monthly' | 'yearly'>('yearly');
 
@@ -113,9 +114,9 @@ watch(isDesktop, (value) => {
 </script>
 
 <template>
-  <section class="py-16">
+  <div>
     <div class="text-center mb-8 sm:mb-16">
-      <h2 class="text-6xl mb-10 text-white font-medium text-center">
+      <h2 class="text-2xl sm:text-6xl mb-6 sm:mb-10 text-white font-medium text-center">
         Plans & Pricing
       </h2>
       <div class="flex gap-1 justify-center items-center">
@@ -202,11 +203,7 @@ watch(isDesktop, (value) => {
               </div>
             </transition>
 
-            <button
-              class="w-full cursor-pointer py-5 px-8 rounded-full font-semibold text-white bg-white/10 hover:bg-white hover:text-black transition-all duration-300 mb-6"
-            >
-              {{ plan.buttonText }}
-            </button>
+            <DefaultButton class="mb-3" :text="plan.buttonText" link="/create" />
 
             <div class="space-y-2 text-left">
               <div v-for="feature in plan.featuresTop" :key="feature" class="flex items-center gap-2">
@@ -255,7 +252,7 @@ watch(isDesktop, (value) => {
         </div>
       </SwiperSlide>
     </Swiper>
-  </section>
+  </div>
 </template>
 
 <style scoped>
@@ -263,6 +260,8 @@ watch(isDesktop, (value) => {
   .swiper-pagination-bullet {
     background: white;
     opacity: 0.4;
+    width:62px;
+    border-radius: 10px;
   }
   .swiper-pagination-bullet-active {
     opacity: 1;

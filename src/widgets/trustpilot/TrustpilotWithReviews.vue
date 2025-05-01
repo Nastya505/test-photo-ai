@@ -1,35 +1,13 @@
 <script setup lang='ts'>
 import { DefaultButton } from '@/widgets/button';
 import TestimonialCard from './TestimonialCard.vue';
+import { reviews } from '@/shared/data/reviews';
 
 defineProps<{
   title: string;
   buttonText: string;
 }>();
 
-interface Card {
-  name: string;
-  emojiUrl: string;
-  text: string;
-}
-
-const cards: Card[] = [
-  {
-    name: 'Josh',
-    emojiUrl: '/images/icon-heart.png',
-    text: 'Photo AI is just fantastic! I take amazing photos of my wife, family and friends. As a photographer I use it to test ideas before creating a real photoshoot. I strongly recommend!',
-  },
-  {
-    name: 'Viki',
-    emojiUrl: '/images/icon-cool.png',
-    text: 'Cool AI tool for image generation! I could create a lot of truly amazing pictures in different locations with different outfits! All my friends were surprised and loved my pictures!',
-  },
-  {
-    name: 'Andrei',
-    emojiUrl: '/images/icon-smile.png',
-    text: 'Good input = good output. Very fun! Took me some effort to get the models to feel accurate but once I got the right input it was amazing. Photo AI was very responsive to my questions.',
-  },
-];
 </script>
 
 <template>
@@ -49,7 +27,7 @@ const cards: Card[] = [
     <!-- Right Side -->
     <div class="w-full md:w-1/2 2xl:w-2/5 flex flex-col justify-center items-center gap-6 md:gap-8">
       <TestimonialCard
-        v-for="(card, index) in cards"
+        v-for="(card, index) in reviews"
         :key="index"
         :name="card.name"
         :emoji="card.emojiUrl"

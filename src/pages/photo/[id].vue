@@ -112,7 +112,7 @@ async function downloadImage() {
 </script>
 
 <template>
-  <div class="container mx-auto px-3 md:px-0">
+  <div class="container mx-auto px-3">
     <div v-if="isLoading" class="text-center flex flex-col gap-4 justify-center items-center h-[80vh]">
       <i class="pi pi-spin pi-spinner" style="font-size: 2rem" />
       <span>Loading</span>
@@ -195,7 +195,7 @@ async function downloadImage() {
           </div>
         </div>
         <TwoColTextAndImageBlock
-          class="md:mt-40 my-8"
+          class="md:mt-40 my-16"
           title="Just upload your photo, choose style and if you want some parameters"
           img-url="/images/photo-selection.webp"
         />

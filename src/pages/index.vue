@@ -21,7 +21,7 @@ import { TrustpilotWithImage, TrustpilotWithReviews } from '@/widgets/trustpilot
     </div>
     <DefaultButton text="Create Perfect Shot" link="#pricing" />
   </div>
-  <div class="flex flex-col gap-12 md:gap-34 container mx-auto px-3 md:px-0">
+  <div class="flex flex-col gap-12 md:gap-34 container mx-auto px-3">
     <Gallery class="mt-8" />
     <ImageBlock title="Best platform for your perfect Headshots" img-url="/images/preview-photo-ai.webp" />
     <TwoColTextAndImageBlock title="Just upload your photo, choose style and if you want some parameters" img-url="/images/photo-selection.webp" />
@@ -31,7 +31,7 @@ import { TrustpilotWithImage, TrustpilotWithReviews } from '@/widgets/trustpilot
     <TwoColTextAndImageBlock fs-class-title="text-6xl" title="Crazy detailed AI image generator" img-url="/images/photo-details.webp" />
   </div>
   <CarouselPacks class="my-12 md:my-34" />
-  <div class="flex flex-col gap-12 md:gap-34 container mx-auto px-3 md:px-0">
+  <div class="flex flex-col gap-12 md:gap-34 container mx-auto px-3">
     <TableImagesBlock />
     <TrustpilotWithImage title="Start taking AI photos now" description="Generate photorealistic images and videos of people with AI. Take stunning photos of people with the first AI Photographer! Generate photo and video content for your social media with AI. Save time and money and do an AI photo" button-text="Create Perfect Shot" />
     <VideoBlock title="Create video clips with AI" subtitle="Take any AI photo you generated, and turn it into a video by tapping [ Make video ]. A few minutes later you have a short video clip of the photo giving you an immersive virtual reality like experience." img-url="/images/preview-guide-photo-ai.webp" />

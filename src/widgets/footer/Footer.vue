@@ -42,7 +42,7 @@ const footerLinks: FooterSection[] = [
 </script>
 
 <template>
-  <footer class="flex-col md:flex-row flex w-full justify-between items-start container mx-auto gap-20 py-15 px-3 md:px-0">
+  <footer class="flex-col md:flex-row flex w-full justify-between items-start container mx-auto gap-20 py-15 px-3">
     <div class="flex flex-col w-full md:w-1/3 justify-start items-start gap-8 order-2 md:order-1">
       <RouterLink to="/">
         <Image src="/images/logo.svg" class="opacity-50" alt="logo" width="150" />

@@ -2,6 +2,7 @@
 import { DefaultButton } from '@/widgets/button';
 import { BlockPricing } from '@/widgets/block-pricing';
 import { FAQSection } from '@/widgets/FAQ';
+import { GalleryPacks } from '@/widgets/gallery-packs';
 import { DefaultBlockImage, PerfectShotSection, TableImagesBlock, TwoColTextAndImageBlock } from '@/widgets/imageBlock';
 </script>
 
@@ -17,6 +18,7 @@ import { DefaultBlockImage, PerfectShotSection, TableImagesBlock, TwoColTextAndI
     </div>
     <DefaultButton text="Create Perfect Shot" link="/create" />
   </div>
+  <GalleryPacks/>
   <TableImagesBlock class="my-40" />
   <TwoColTextAndImageBlock class="my-40" fs-class-title="text-6xl" title="Crazy detailed AI image generator" img-url="/images/photo-details.webp" />
   <TwoColTextAndImageBlock class="my-40" title="Just upload your photo, choose style and if you want some parameters" img-url="/images/photo-selection.webp" />

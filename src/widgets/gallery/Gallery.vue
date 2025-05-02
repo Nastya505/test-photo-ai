@@ -45,7 +45,9 @@ const filteredPhotos = computed(() => {
 
 // Number of photos to display
 const displayedPhotos = computed(() => {
-  return isLargeDesktop.value ? filteredPhotos.value.slice(0, 13) : isDesktop? filteredPhotos.value.slice(0, 12): filteredPhotos.value.slice(0, 11);
+  if (isLargeDesktop.value) return filteredPhotos.value.slice(0, 13);
+  if (isDesktop.value) return filteredPhotos.value.slice(0, 12);
+  return filteredPhotos.value.slice(0, 11);
 });
 
 onMounted(async () => {

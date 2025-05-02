@@ -50,6 +50,11 @@ onMounted(async () => {
 
   isLoading.value = false;
 });
+const displayedPhotos = computed(() => {
+  if (isLargeDesktop.value) return 13;
+  if (isDesktop.value) return 12;
+  return 11;
+});
 </script>
 
 <template>
@@ -71,7 +76,7 @@ onMounted(async () => {
           <!-- Skeletons while loading -->
           <div v-if="isLoading" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 auto-rows-fr gap-4">
             <div
-              v-for="i in (isLargeDesktopSnapshot ? 13: isDesktopSnapshot? 12 : 11)"
+              v-for="i in displayedPhotos"
               :key="`placeholder-${i}`"
               class="bg-gray-200 rounded-md shadow-sm animate-pulse" :class="[getCardClass(i - 1, isTabletSnapshot)]"
             >

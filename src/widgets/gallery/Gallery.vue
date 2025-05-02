@@ -82,7 +82,7 @@ watch(() => categoryContainer.value, () => checkOverflow());
 </script>
 
 <template>
-  <section id="gallery" class="flex flex-col gap-8">
+  <section class="flex flex-col gap-8">
     <!-- Category filter -->
     <div
       v-if="!isLoading && categories.length"

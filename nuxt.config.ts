@@ -26,15 +26,6 @@ export default defineNuxtConfig({
     plugins: [
       tailwindcss(),
     ],
-    server: {
-      proxy: {
-        '/api': {
-          target: 'https://api.photoai.artlogo.co',
-          changeOrigin: true,
-          rewrite: path => path.replace(/^\/api/, ''),
-        },
-      },
-    },
   },
   routeRules: {
     '/create': { redirect: 'https://photoai.artlogo.co/' },

@@ -8,9 +8,9 @@ const { y } = useWindowScroll();
 const hasScrolled = computed(() => y.value > 0);
 
 const navLinks = [
-  { label: 'Pricing', href: '#pricing' },
-  { label: 'Billing', href: '#billing' },
-  { label: 'Gallery', href: '#gallery' },
+  { label: 'Pricing', href: '/#pricing' },
+  { label: 'Billing', href: '/#billing' },
+  { label: 'Gallery', href: '/#gallery' },
 ];
 
 function toggleMenu() {
@@ -99,7 +99,7 @@ onUnmounted(() => {
           {{ link.label }}
         </a>
 
-        <DefaultButton class="z-50 scale-150 ml-8" text="Create Perfect Shot" link="#pricing" variant="outlined" />
+        <DefaultButton class="z-50 scale-150 ml-8" text="Create Perfect Shot" link="/#pricing" variant="outlined" @click="closeMenu" />
         <Image class="absolute -bottom-64 right-0 z-40" src="/images/menu-effect.png" alt="logo" width="770" />
       </div>
     </transition>

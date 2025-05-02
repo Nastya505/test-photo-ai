@@ -114,7 +114,7 @@ watch(isDesktop, (value) => {
 </script>
 
 <template>
-  <div>
+  <section id="pricing">
     <div class="text-center mb-8 sm:mb-16">
       <h2 class="text-2xl sm:text-6xl mb-6 sm:mb-10 text-white font-medium text-center">
         Plans & Pricing
@@ -154,7 +154,7 @@ watch(isDesktop, (value) => {
         768: { slidesPerView: 1.1 },
         1024: { slidesPerView: 3 },
       }"
-      class="pricing-swiper  !pb-16"
+      class="pricing-swiper  !pb-16 lg:!pb-0"
       @swiper="swiperRef = $event"
     >
       <SwiperSlide
@@ -252,7 +252,7 @@ watch(isDesktop, (value) => {
         </div>
       </SwiperSlide>
     </Swiper>
-  </div>
+  </section>
 </template>
 
 <style scoped>

@@ -47,13 +47,19 @@ const similarPhotos = computed(() => {
   if (!currentPhoto.value) {
     return [];
   }
-  return allPhotos.value
-    .filter(
-      p =>
-        p.id !== currentPhoto.value?.id
-        && p.model.name === currentPhoto.value?.model.name,
-    )
-    .slice(0, 6);
+
+  const filtered = allPhotos.value.filter(
+    p =>
+      p.id !== currentPhoto.value?.id
+      && p.model.name === currentPhoto.value?.model.name,
+  );
+
+  for (let i = filtered.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [filtered[i], filtered[j]] = [filtered[j], filtered[i]];
+  }
+
+  return filtered.slice(0, 6);
 });
 
 onMounted(async () => {

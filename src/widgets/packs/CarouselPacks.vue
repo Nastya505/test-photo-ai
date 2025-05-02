@@ -64,7 +64,7 @@ function updateNavState() {
 </script>
 
 <template>
-  <div>
+  <section id="billing">
     <div class="px-3 flex flex-col gap-10 justify-center items-center">
       <div class="flex flex-col gap-6 justify-center items-center">
         <h1 class="text-2xl sm:text-6xl text-white font-medium text-center">
@@ -103,24 +103,28 @@ function updateNavState() {
             :key="pack.name"
             class="cursor-pointer group"
           >
-            <div class="rounded-sm overflow-hidden">
-              <img
-                :src="pack.covers[0]"
-                alt="cover pack"
-                class="w-full h-auto transition-transform duration-300 group-hover:scale-105"
-              >
-            </div>
-
-            <h2
-              class="font-medium text-white max-w-8/9 text-left whitespace-nowrap overflow-hidden text-ellipsis mt-5 mb-3"
-              style="font-size: clamp(1.25rem, 2vw, 1.875rem);"
+            <RouterLink
+              :to="`/pack/${pack.name}`"
             >
-              {{ pack.name }}
-            </h2>
+              <div class="rounded-sm overflow-hidden">
+                <img
+                  :src="pack.covers[0]"
+                  alt="cover pack"
+                  class="w-full h-auto transition-transform duration-300 group-hover:scale-105"
+                >
+              </div>
 
-            <p class="text-white/30 max-w-8/9 italic text-base font-semibold line-clamp-3">
-              {{ pack.description }}
-            </p>
+              <h2
+                class="font-medium text-white max-w-8/9 text-left whitespace-nowrap overflow-hidden text-ellipsis mt-5 mb-3"
+                style="font-size: clamp(1.25rem, 2vw, 1.875rem);"
+              >
+                {{ pack.name }}
+              </h2>
+
+              <p class="text-white/30 max-w-8/9 italic text-base font-semibold line-clamp-3">
+                {{ pack.description }}
+              </p>
+            </RouterLink>
           </SwiperSlide>
         </template>
 
@@ -161,5 +165,5 @@ function updateNavState() {
         </button>
       </div>
     </div>
-  </div>
+  </section>
 </template>

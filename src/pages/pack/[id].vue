@@ -13,9 +13,11 @@ import { useRoute } from 'vue-router';
 
 const isTablet = useMediaQuery('(min-width: 768px)');
 const isDesktop = useMediaQuery('(min-width: 1023px)');
+const isLargeDesktop = useMediaQuery('(min-width: 1536px)');
 
 const isTabletSnapshot = ref(false);
 const isDesktopSnapshot = ref(false);
+const isLargeDesktopSnapshot = ref(false);
 
 const route = useRoute();
 const selectedPackName = ref<string | null>(null);
@@ -33,7 +35,7 @@ function getCardClass(itemIndex: number, isTabletLocal = isTablet.value) {
 onMounted(async () => {
   isTabletSnapshot.value = isTablet.value;
   isDesktopSnapshot.value = isDesktop.value;
-
+  isLargeDesktopSnapshot.value = isLargeDesktop.value;
   const examples = await getExamples();
 
   const packId = route.params.id as string;
@@ -67,9 +69,9 @@ onMounted(async () => {
       <div class="flex flex-col gap-8 container mx-auto px-3">
         <div class="relative">
           <!-- Skeletons while loading -->
-          <div v-if="isLoading" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr gap-4">
+          <div v-if="isLoading" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 auto-rows-fr gap-4">
             <div
-              v-for="i in (isDesktopSnapshot ? 12 : 11)"
+              v-for="i in (isLargeDesktopSnapshot ? 13: isDesktopSnapshot? 12 : 11)"
               :key="`placeholder-${i}`"
               class="bg-gray-200 rounded-md shadow-sm animate-pulse" :class="[getCardClass(i - 1, isTabletSnapshot)]"
             >
@@ -77,7 +79,7 @@ onMounted(async () => {
             </div>
           </div>
 
-          <div v-else class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr gap-4 pb-24">
+          <div v-else class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 auto-rows-fr gap-4 pb-24">
             <PhotoCard
               v-for="(photo, index) in allPhotos"
               :key="photo.id"

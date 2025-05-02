@@ -8,9 +8,11 @@ import PhotoCard from './PhotoCard.vue';
 
 const isTablet = useMediaQuery('(min-width: 768px)');
 const isDesktop = useMediaQuery('(min-width: 1023px)');
+const isLargeDesktop = useMediaQuery('(min-width: 1536px)');
 
 const isTabletSnapshot = ref(false);
 const isDesktopSnapshot = ref(false);
+const isLargeDesktopSnapshot = ref(false);
 
 const photos = ref<components['schemas']['ExamplePhoto'][]>([]);
 const isLoading = ref(true);
@@ -43,12 +45,13 @@ const filteredPhotos = computed(() => {
 
 // Number of photos to display
 const displayedPhotos = computed(() => {
-  return isDesktop.value ? filteredPhotos.value.slice(0, 12) : filteredPhotos.value.slice(0, 11);
+  return isLargeDesktop.value ? filteredPhotos.value.slice(0, 13) : isDesktop? filteredPhotos.value.slice(0, 12): filteredPhotos.value.slice(0, 11);
 });
 
 onMounted(async () => {
   isTabletSnapshot.value = isTablet.value;
   isDesktopSnapshot.value = isDesktop.value;
+  isLargeDesktopSnapshot.value = isLargeDesktop.value;
   const allPhotos = await getExamples();
   photos.value = allPhotos;
   isLoading.value = false;
@@ -105,7 +108,7 @@ watch(() => categoryContainer.value, () => checkOverflow());
 
     <div class="relative">
       <!-- Skeletons while loading -->
-      <div v-if="isLoading" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr gap-4">
+      <div v-if="isLoading" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 auto-rows-fr gap-4">
         <div
           v-for="i in (isDesktopSnapshot ? 12 : 11)"
           :key="`placeholder-${i}`"
@@ -115,7 +118,7 @@ watch(() => categoryContainer.value, () => checkOverflow());
         </div>
       </div>
 
-      <div v-else class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr gap-4 pb-24">
+      <div v-else class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 auto-rows-fr gap-4 pb-24">
         <PhotoCard
           v-for="(photo, index) in displayedPhotos"
           :key="photo.id"

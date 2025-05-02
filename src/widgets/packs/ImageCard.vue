@@ -20,7 +20,8 @@ defineProps<{
       <img
         :src="item.covers[0]"
         :alt="item.name"
-        class="w-full object-cover" :class="[heightClass]"
+        loading="lazy"
+        class="w-full object-top object-cover" :class="[heightClass]"
       >
     </div>
     <h2

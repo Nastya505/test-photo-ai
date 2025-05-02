@@ -2,12 +2,12 @@
 import type { components } from '@/shared/lib/photo-api';
 import { getExamples } from '@/shared/lib/api';
 import { DefaultButton } from '@/widgets/button';
-import { TwoColTextAndImageBlock } from '@/widgets/media-blocks';
 import { ResultLine } from '@/widgets/resultLine/intex';
 import { SwiperDefault } from '@/widgets/swiper';
 import { domToBlob } from 'modern-screenshot';
 import { computed, nextTick, onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import {ResultImage } from '@/widgets/media-blocks';
 
 const route = useRoute();
 const router = useRouter();
@@ -118,23 +118,23 @@ async function downloadImage() {
 </script>
 
 <template>
-  <div class="container mx-auto px-3">
+  <div>
     <div v-if="isLoading" class="text-center flex flex-col gap-4 justify-center items-center h-[80vh]">
       <i class="pi pi-spin pi-spinner" style="font-size: 2rem" />
       <span>Loading</span>
     </div>
 
     <div v-if="currentPhoto" class="pt-24">
-      <RouterLink to="/" class="flex items-center gap-3 text-white transition-colors hover:text-white/80 mb-4 md:mb-10">
+      <button class="flex items-center gap-3 container mx-auto px-3 text-white transition-colors hover:text-white/80 mb-4 md:mb-10" @click="router.back()">
         <i class="pi pi-arrow-left !font-semibold" />
-        <span class="text-base  font-semibold">Back</span>
-      </RouterLink>
+        <span class="text-base font-semibold">Back</span>
+      </button>
       <div class="flex justify-center items-center flex-col">
-        <div class="flex justify-between items-center w-full gap-10  flex-col">
+        <div class="flex justify-between items-center w-full gap-10  flex-col container mx-auto px-3">
           <div class="flex justify-between items-start w-full gap-6 md:gap-8 flex-col md:flex-row">
             <div class="w-full flex flex-col gap-4 md:w-2/5">
               <div class="w-full rounded-2xl overflow-hidden">
-                <img ref="currentPhotoRef" :src="currentPhoto.image_url!" class="w-full h-full">
+                <img ref="currentPhotoRef" :src="currentPhoto.image_url!" class="w-full h-full" loading="lazy">
               </div>
               <div class="flex w-full justify-between items-center md:hidden">
                 <div class="w-1/2">
@@ -200,12 +200,10 @@ async function downloadImage() {
             </div>
           </div>
         </div>
-        <TwoColTextAndImageBlock
-          class="md:mt-40 my-16"
-          title="Just upload your photo, choose style and if you want some parameters"
-          img-url="/images/photo-selection.webp"
-        />
-        <DefaultButton class="mb-32" text="Start generate your photos" link="#pricing" icon="pi-step-forward" />
+        <div class="flex flex-col justify-center w-full items-center my-16 md:my-40 gap-16">
+          <ResultImage result-img-url="/images/perfect-photo.webp" />
+          <DefaultButton class="max-w-96" text="Start generate your photos" link="/#pricing" icon="pi-step-forward" />
+        </div>
       </div>
     </div>
   </div>

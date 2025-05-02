@@ -48,7 +48,7 @@ onUnmounted(() => {
   >
     <!-- Logo -->
     <RouterLink to="/">
-      <Image src="/images/logo.svg" alt="logo" width="150" />
+      <Image src="/images/logo.svg" alt="logo" width="150" loading="lazy" />
     </RouterLink>
 
     <!-- Desktop Navigation -->
@@ -100,7 +100,7 @@ onUnmounted(() => {
         </a>
 
         <DefaultButton class="z-50 scale-150 ml-8" text="Create Perfect Shot" link="/#pricing" variant="outlined" @click="closeMenu" />
-        <Image class="absolute -bottom-64 right-0 z-40" src="/images/menu-effect.png" alt="logo" width="770" />
+        <Image class="absolute -bottom-64 right-0 z-40" src="/images/menu-effect.png" alt="logo" width="770" loading="lazy" />
       </div>
     </transition>
   </header>

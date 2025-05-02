@@ -37,6 +37,7 @@ const props = withDefaults(
     </div>
     <div class="overflow-hidden rounded-sm w-full" :class="[props.orderImage === '1' ? 'order-1 md:order-2 ' : 'order-2 md:order-1']">
       <Image
+        loading="lazy"
         :src="props.imgUrl"
       />
     </div>

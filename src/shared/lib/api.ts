@@ -1,8 +1,12 @@
 import type { paths } from './photo-api';
 import createClient from 'openapi-fetch';
 
+const baseUrl = import.meta.env.DEV
+  ? '/api'
+  : 'https://api.photoai.artlogo.co';
+
 const client = createClient<paths>({
-  baseUrl: 'https://api.photoai.artlogo.co',
+  baseUrl,
 });
 
 export async function getExamples() {

@@ -5,7 +5,7 @@ import { Header } from '@/widgets/header';
 
 <template>
   <div class="relative m-0">
-    <Image class="absolute -top-16 left-0 -z-10" src="/images/effect.png" alt="logo" width="525" />
+    <Image class="absolute -top-16 left-0 -z-10" src="/images/effect.png" alt="logo" width="525" loading="lazy" />
     <div class="mt-2.5 md:mt-5 z-1">
       <Header />
       <div>

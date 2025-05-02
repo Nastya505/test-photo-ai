@@ -28,7 +28,10 @@ const activePanels = ref<string[]>(['0']);
       </Accordion>
     </div>
     <div class="hidden md:block overflow-hidden rounded-lg max-w-[700px]">
-      <Image :src="imageSrc" alt="Photo FAQ" class="w-full h-auto object-cover" />
+      <Image
+        loading="lazy"
+        :src="imageSrc" alt="Photo FAQ" class="w-full h-auto object-cover"
+      />
     </div>
   </div>
 </template>

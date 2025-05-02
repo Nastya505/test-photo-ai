@@ -34,11 +34,6 @@ export default defineNuxtConfig({
           rewrite: path => path.replace(/^\/api/, ''),
         },
       },
-      cors: {
-        origin: [
-          /^https:\/\/test-photo-ai\.vercel\.app$/, // for Vercel
-        ],
-      },
     },
   },
   routeRules: {

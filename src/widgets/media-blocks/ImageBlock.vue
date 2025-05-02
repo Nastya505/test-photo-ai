@@ -17,7 +17,7 @@ const props = defineProps<{
       </h3>
     </div>
     <div class="overflow-hidden rounded-2xl">
-      <Image :src="props.url" class="w-full" />
+      <Image :src="props.url" class="w-full" loading="lazy" />
     </div>
   </div>
 </template>

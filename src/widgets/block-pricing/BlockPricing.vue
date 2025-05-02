@@ -115,7 +115,7 @@ watch(isDesktop, (value) => {
 
 <template>
   <section id="pricing">
-    <div class="text-center mb-8 sm:mb-16">
+    <div class="text-center mb-8 sm:mb-8">
       <h2 class="text-2xl sm:text-6xl mb-6 sm:mb-10 text-white font-medium text-center">
         Plans & Pricing
       </h2>
@@ -171,6 +171,7 @@ watch(isDesktop, (value) => {
             src="/images/pricing-effect.png"
             alt="effect"
             width="260"
+            loading="lazy"
             class="absolute bottom-0 right-0 z-0 pointer-events-none select-none"
           />
 
@@ -207,7 +208,10 @@ watch(isDesktop, (value) => {
 
             <div class="space-y-2 text-left">
               <div v-for="feature in plan.featuresTop" :key="feature" class="flex items-center gap-2">
-                <Image src="/images/fire-white.svg" alt="icon-fire" width="24" />
+                <Image
+                  loading="lazy"
+                  src="/images/fire-white.svg" alt="icon-fire" width="24"
+                />
                 <span class="text-white text-sm sm:text-lg lg:text-sm xl:text-lg italic font-medium leading-normal">{{ feature }}</span>
               </div>
             </div>

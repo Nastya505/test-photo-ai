@@ -1,23 +1,34 @@
 <script setup lang="ts">
 import type { components } from '@/shared/lib/photo-api';
-import { getPacks } from '@/shared/lib/api';
+import { getExamples, getPacks } from '@/shared/lib/api';
 import ImageCard from './ImageCard.vue';
 
 type PromptPackWithCovers = components['schemas']['PromptPack'] & {
   covers: string[];
 };
+
 const packs = ref<components['schemas']['PromptPack'][]>([]);
+const examples = ref<components['schemas']['ExamplePhoto'][]>([]);
 const isLoading = ref(true);
 
 onMounted(async () => {
-  packs.value = await getPacks();
+  const [fetchedPacks, fetchedExamples] = await Promise.all([
+    getPacks(),
+    getExamples(),
+  ]);
+
+  packs.value = fetchedPacks;
+  examples.value = fetchedExamples;
   isLoading.value = false;
 });
 
 const validPacks = computed(() => {
   return packs.value.filter(
     (p): p is PromptPackWithCovers =>
-      Array.isArray(p.covers) && p.covers.length > 0 && p.covers.every(c => typeof c === 'string'),
+      Array.isArray(p.covers)
+      && p.covers.length > 0
+      && p.covers.every(c => typeof c === 'string')
+      && examples.value.some(e => e.prompt_pack?.id === p.id),
   );
 });
 
@@ -97,7 +108,7 @@ const sections = computed<Section[]>(() => {
           <RouterLink
             v-for="(item, index) in section.left"
             :key="`l${index}`"
-            :to="`/pack/${item.name}`"
+            :to="`/pack/${item.id}`"
           >
             <ImageCard
               :item="item"
@@ -109,7 +120,7 @@ const sections = computed<Section[]>(() => {
           <RouterLink
             v-for="(item, index) in section.right"
             :key="`r${index}`"
-            :to="`/pack/${item.name}`"
+            :to="`/pack/${item.id}`"
           >
             <ImageCard
               :item="item"
@@ -125,16 +136,16 @@ const sections = computed<Section[]>(() => {
       >
         <div class="columns-1 w-full lg:w-1/2 bg-black text-white">
           <RouterLink
-            :to="`/pack/${section.solo.name}`"
+            :to="`/pack/${section.solo.id}`"
           >
-            <ImageCard :item="section.solo" height-class="h-[440px] md:h-[1064px] object-top md:object-cover" />
+            <ImageCard :item="section.solo" height-class="h-[440px] md:h-[1064px]" />
           </RouterLink>
         </div>
         <div class="columns-2 w-full lg:w-1/2 gap-4 bg-black text-white">
           <RouterLink
             v-for="(item, index) in section.four"
             :key="index"
-            :to="`/pack/${item.name}`"
+            :to="`/pack/${item.id}`"
           >
             <ImageCard
               :item="item"

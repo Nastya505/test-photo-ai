@@ -21,7 +21,7 @@ defineProps<{
       <div class="text-white/80 text-lg font-medium leading-relaxed">
         "{{ text }}"
       </div>
-      <img :src="emoji" class="max-w-16" alt="emoji">
+      <img :src="emoji" class="max-w-16" alt="emoji" loading="lazy">
     </div>
   </div>
 </template>

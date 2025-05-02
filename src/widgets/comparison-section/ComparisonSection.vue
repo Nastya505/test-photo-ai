@@ -53,6 +53,7 @@ watch(isDesktop, (value) => {
           src="/images/comparison-effect.png"
           alt="effect"
           width="460"
+          loading="lazy"
           class="absolute bottom-0 right-0 -z-1 pointer-events-none select-none"
         />
         <div
@@ -64,6 +65,7 @@ watch(isDesktop, (value) => {
             <img
               :src="comp.image"
               :alt="comp.name"
+              loading="lazy"
               class="object-cover rounded-lg w-full h-full"
             >
           </div>

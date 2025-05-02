@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { components } from '@/shared/lib/photo-api';
-import { getPacks } from '@/shared/lib/api';
+import { getExamples, getPacks } from '@/shared/lib/api';
 import { DefaultButton } from '@/widgets/button';
 import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
-import { ref } from 'vue';
+import { computed, nextTick, onMounted, ref } from 'vue';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
@@ -14,21 +14,35 @@ const isBeginning = ref(true);
 const isEnd = ref(false);
 const isLoading = ref(true);
 const skeletonCount = 5;
-const packs = ref<components['schemas']['PromptPack'][]>([]);
+
+const allPacks = ref<components['schemas']['PromptPack'][]>([]);
+const examples = ref<components['schemas']['ExamplePhoto'][]>([]);
+
+const validPacks = computed(() => {
+  return allPacks.value.filter((pack) => {
+    const hasCovers = Array.isArray(pack.covers) && pack.covers.length > 0;
+    const hasExamples = examples.value.some(example => example.prompt_pack?.id === pack.id);
+    return hasCovers && hasExamples;
+  });
+});
+
+const visibleSlides = ref(1);
+const totalSlides = computed(() => validPacks.value.length);
 
 onMounted(async () => {
-  packs.value = await getPacks();
+  const [fetchedPacks, fetchedExamples] = await Promise.all([
+    getPacks(),
+    getExamples(),
+  ]);
+
+  allPacks.value = fetchedPacks;
+  examples.value = fetchedExamples;
+
   isLoading.value = false;
+
   await nextTick();
   updateNavState();
 });
-const validPacks = computed(() =>
-  packs.value.filter((p): p is typeof p & { covers: string[] } =>
-    Array.isArray(p.covers) && p.covers.length > 0,
-  ),
-);
-const visibleSlides = ref(1);
-const totalSlides = computed(() => validPacks.value.length);
 
 function onSwiper(swiper: any) {
   swiperRef.value = swiper;
@@ -45,11 +59,9 @@ function updateNavState() {
   isEnd.value = swiper.isEnd;
 
   let slidesPerView = swiper.params.slidesPerView;
-
   if (typeof slidesPerView === 'function') {
     slidesPerView = slidesPerView();
   }
-
   if (typeof slidesPerView !== 'number') {
     slidesPerView = 1;
   }
@@ -104,12 +116,13 @@ function updateNavState() {
             class="cursor-pointer group"
           >
             <RouterLink
-              :to="`/pack/${pack.name}`"
+              :to="`/pack/${pack.id}`"
             >
               <div class="rounded-sm overflow-hidden">
                 <img
-                  :src="pack.covers[0]"
+                  :src="pack.covers![0]"
                   alt="cover pack"
+                  loading="lazy"
                   class="w-full h-auto transition-transform duration-300 group-hover:scale-105"
                 >
               </div>

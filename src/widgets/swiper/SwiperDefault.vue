@@ -56,6 +56,7 @@ function updateNavState() {
         <img
           :src="photo.image_url!"
           alt="similar photo"
+          loading="lazy"
           class="hover:scale-105 w-full h-auto transition-transform duration-300"
         >
       </SwiperSlide>

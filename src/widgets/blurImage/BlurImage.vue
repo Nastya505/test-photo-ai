@@ -54,6 +54,7 @@ function handleImageLoad() {
     <img
       :src="src"
       :alt="alt ?? 'Image'"
+      loading="lazy"
       class="absolute rounded-sm inset-0 w-full h-full object-cover transition-opacity duration-500"
       :class="{ 'opacity-0': !isLoaded, 'opacity-100': isLoaded }"
       @load="handleImageLoad"

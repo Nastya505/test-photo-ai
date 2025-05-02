@@ -26,6 +26,14 @@ export default defineNuxtConfig({
     plugins: [
       tailwindcss(),
     ],
+    server: {
+      cors: {
+        origin: [
+          /^https?:\/\/(?:(?:[^:]+\.)?localhost|127\.0\.0\.1|\[::1\])(?::\d+)?$/, // for localhost
+          /^https:\/\/test-photo-ai\.vercel\.app$/, // for Vercel
+        ],
+      },
+    },
   },
   routeRules: {
     '/create': { redirect: 'https://photoai.artlogo.co/' },

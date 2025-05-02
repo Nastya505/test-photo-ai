@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { components } from '@/shared/lib/photo-api';
 import { getPacks } from '@/shared/lib/api';
-import { DefaultButton } from '@/widgets/button';
 import ImageCard from './ImageCard.vue';
 
 type PromptPackWithCovers = components['schemas']['PromptPack'] & {

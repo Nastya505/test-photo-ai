@@ -27,9 +27,15 @@ export default defineNuxtConfig({
       tailwindcss(),
     ],
     server: {
+      proxy: {
+        '/api': {
+          target: 'https://api.photoai.artlogo.co',
+          changeOrigin: true,
+          rewrite: path => path.replace(/^\/api/, ''),
+        },
+      },
       cors: {
         origin: [
-          /^https?:\/\/(?:(?:[^:]+\.)?localhost|127\.0\.0\.1|\[::1\])(?::\d+)?$/, // for localhost
           /^https:\/\/test-photo-ai\.vercel\.app$/, // for Vercel
         ],
       },

@@ -3,6 +3,10 @@ import { DefaultButton } from '@/widgets/button';
 import { useWindowScroll } from '@vueuse/core';
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 
+const props = defineProps<{
+  showHeader?: boolean;
+}>();
+
 const isMobileMenuOpen = ref(false);
 const { y } = useWindowScroll();
 const hasScrolled = computed(() => y.value > 0);
@@ -52,7 +56,7 @@ onUnmounted(() => {
     </RouterLink>
 
     <!-- Desktop Navigation -->
-    <nav class="hidden md:flex justify-end items-center gap-8">
+    <nav v-if="props.showHeader" class="hidden md:flex justify-end items-center gap-8">
       <div class="flex gap-6 items-center">
         <a
           v-for="link in navLinks"
@@ -67,7 +71,7 @@ onUnmounted(() => {
     </nav>
 
     <!-- Mobile Menu Button -->
-    <button
+    <button v-if="props.showHeader"
       class="md:hidden text-white"
       aria-label="Open mobile menu"
       @click="toggleMenu"
@@ -76,7 +80,7 @@ onUnmounted(() => {
     </button>
 
     <!-- Mobile Menu Overlay -->
-    <transition name="fade">
+    <transition name="fade" v-if="props.showHeader">
       <div
         v-if="isMobileMenuOpen"
         class="fixed inset-0 z-50 h-screen bg-black text-white flex flex-col gap-16 py-20 px-8 items-start justify-start text-2xl"

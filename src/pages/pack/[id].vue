@@ -36,16 +36,13 @@ onMounted(async () => {
   isTabletSnapshot.value = isTablet.value;
   isDesktopSnapshot.value = isDesktop.value;
   isLargeDesktopSnapshot.value = isLargeDesktop.value;
-  const examples = await getExamples();
-
   const packId = route.params.id as string;
-  const matchingPhotos = examples.filter(photo =>
-    photo.prompt_pack?.id === packId,
-  );
+  const examples = await getExamples({prompt_pack_id:packId});
 
-  allPhotos.value = matchingPhotos;
-  if (matchingPhotos.length > 0) {
-    selectedPackName.value = matchingPhotos[0].prompt_pack?.name || '';
+
+  allPhotos.value = examples;
+  if (examples.length > 0) {
+    selectedPackName.value = examples[0].prompt_pack?.name || '';
   }
 
   isLoading.value = false;

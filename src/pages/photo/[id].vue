@@ -1,120 +1,30 @@
 <script setup lang="ts">
 import type { components } from '@/shared/lib/photo-api';
-import { getExamples } from '@/shared/lib/api';
+import { getExampleById } from '@/shared/lib/api';
 import { DefaultButton } from '@/widgets/button';
 import { ResultImage } from '@/widgets/media-blocks';
 import { ResultLine } from '@/widgets/resultLine/intex';
 import { SwiperDefault } from '@/widgets/swiper';
-import { domToBlob } from 'modern-screenshot';
-import { computed, nextTick, onMounted, ref } from 'vue';
+import {  onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute();
 const router = useRouter();
 
-const allPhotos = ref<components['schemas']['ExamplePhoto'][]>([]);
 const isLoading = ref(true);
 
-const currentPhotoRef = ref<HTMLImageElement | null>(null);
 
-const currentPhoto = computed(() => {
-  return allPhotos.value.find(p => String(p.id) === String(route.params.id));
-});
+const currentPhoto = ref<components['schemas']['ExamplePhoto'] | null>(null);
+const currentPhotoId=route.params.id as string;
+const model = route.query.model as string;
 
-const currentIndex = computed(() => {
-  return allPhotos.value.findIndex(p => String(p.id) === String(route.params.id));
-});
 
-const nextPhoto = computed(() => {
-  if (currentIndex.value >= 0 && currentIndex.value < allPhotos.value.length - 1) {
-    return allPhotos.value[currentIndex.value + 1];
-  }
-  return null;
-});
-
-const prevPhoto = computed(() => {
-  if (currentIndex.value > 0) {
-    return allPhotos.value[currentIndex.value - 1];
-  }
-  return null;
-});
-
-function goToPhoto(id: string | number) {
-  router.push({ name: route.name as string, params: { id } });
-}
-
-const similarPhotos = computed(() => {
-  if (!currentPhoto.value) {
-    return [];
-  }
-
-  const filtered = allPhotos.value.filter(
-    p =>
-      p.id !== currentPhoto.value?.id
-      && p.model.name === currentPhoto.value?.model.name,
-  );
-
-  for (let i = filtered.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [filtered[i], filtered[j]] = [filtered[j], filtered[i]];
-  }
-
-  return filtered.slice(0, 6);
-});
 
 onMounted(async () => {
-  allPhotos.value = await getExamples();
+  currentPhoto.value = await getExampleById(currentPhotoId);
   isLoading.value = false;
 });
 
-async function getNode() {
-  await nextTick();
-  let attempts = 0;
-  const maxAttempts = 10;
-  let element = currentPhotoRef.value;
-
-  while (!element && attempts < maxAttempts) {
-    await new Promise(resolve => setTimeout(resolve, 300));
-    element = currentPhotoRef.value;
-    attempts++;
-  }
-
-  return element || null;
-}
-async function downloadImage() {
-  const node = await getNode();
-  if (!node) {
-    console.error('Element not found');
-    return;
-  }
-
-  try {
-    const blob = await domToBlob(node, {
-      quality: 0.95,
-      scale: 2,
-      type: 'image/jpeg',
-      backgroundColor: '#ffffff',
-      width: node.clientWidth,
-      height: node.clientHeight,
-    });
-
-    if (!blob) {
-      console.error('Failed to generate blob');
-      return;
-    }
-
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `artphoto-${currentPhoto.value?.id}.jpg`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-  } catch (err) {
-    console.error('Download failed:', err);
-  }
-}
 </script>
 
 <template>
@@ -124,87 +34,27 @@ async function downloadImage() {
       <span>Loading</span>
     </div>
 
-    <div v-if="currentPhoto" class="pt-24">
-      <button class="flex items-center gap-3 container mx-auto px-3 text-white transition-colors hover:text-white/80 mb-4 md:mb-10" @click="router.back()">
-        <i class="pi pi-arrow-left !font-semibold" />
-        <span class="text-base font-semibold">Back</span>
-      </button>
-      <div class="flex justify-center items-center flex-col">
-        <div class="flex justify-between items-center w-full gap-10  flex-col container mx-auto px-3">
-          <div class="flex justify-between items-start w-full gap-6 md:gap-8 flex-col md:flex-row">
-            <div class="w-full flex flex-col gap-4 md:w-2/5">
+    <div v-if="currentPhoto" class="py-24 container mx-auto px-3">
+
+          <div v-if="model === 'artphoto'" class="flex justify-between items-start w-full gap-6 md:gap-8 flex-col md:flex-row">
+            <div class="w-full flex flex-col gap-4 md:w-1/2">
               <div class="w-full rounded-2xl overflow-hidden">
-                <img ref="currentPhotoRef" :src="currentPhoto.image_url!" class="w-full h-full" loading="lazy">
-              </div>
-              <div class="flex w-full justify-between items-center md:hidden">
-                <div class="w-1/2">
-                  <DefaultButton
-                    v-if="prevPhoto"
-                    text="prev prompt"
-                    position-icon="left"
-                    icon="pi-arrow-left"
-                    variant="outlined"
-                    @click="goToPhoto(prevPhoto.id)"
-                  />
-                </div>
-                <div class="w-1/2 flex justify-end">
-                  <DefaultButton
-                    v-if="nextPhoto"
-                    text="next prompt"
-                    icon="pi-arrow-right"
-                    variant="outlined"
-                    @click="goToPhoto(nextPhoto.id)"
-                  />
-                </div>
+                <img :src="currentPhoto.image_url!" class="w-full h-full" loading="lazy">
               </div>
             </div>
-            <div class="flex flex-col w-full md:w-3/5 justify-start items-start gap-8">
-              <ResultLine title="Prompt" :text="currentPhoto.prompt" />
-              <DefaultButton text="Try this prompt" link="/#pricing" icon="pi-arrow-circle-right" />
+            <div class="flex flex-col w-full md:w-1/2 justify-start items-start gap-8">
               <ResultLine title="Model" :text="currentPhoto.model.name" />
               <ResultLine title="Preset" :text="currentPhoto.prompt_pack?.name" />
               <ResultLine title="License" text="Free to use with backlink to ArtPhoto Ai" />
-              <button class="cursor-pointer flex items-center gap-2 text-white relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:bg-white after:opacity-100 hover:after:opacity-50" @click="downloadImage()">
-                <span class="text-lg text-white font-semibold">
-                  Download image
-                </span>
-                <i class="pi pi-download" />
-              </button>
-              <div v-if="similarPhotos.length" class="w-full flex flex-col gap-2">
-                <h5 class="text-left text-lg font-semibold text-white">
-                  Similar Photos
-                </h5>
-                <SwiperDefault :photos="similarPhotos" :go-to-photo="goToPhoto" />
+              <DefaultButton text="Create Your Perfect Shot" link="#" icon="pi-arrow-circle-right" />
+            </div>
+          </div>
+          <div v-if="model === 'client'" class="flex justify-center items-center w-full gap-6 md:gap-8 flex-col">
+              <div class="w-full md:w-1/2 rounded-2xl overflow-hidden">
+                <img :src="currentPhoto.image_url!" class="w-full h-full" loading="lazy">
               </div>
-            </div>
+              <DefaultButton text="Create Your Perfect Shot" link="/#pricing" icon="pi-arrow-circle-right" />
           </div>
-          <div class="hidden md:flex w-full justify-between items-center">
-            <div class="w-1/2">
-              <DefaultButton
-                v-if="prevPhoto"
-                text="prev prompt"
-                position-icon="left"
-                icon="pi-arrow-left"
-                variant="outlined"
-                @click="goToPhoto(prevPhoto.id)"
-              />
-            </div>
-            <div class="w-1/2 flex justify-end">
-              <DefaultButton
-                v-if="nextPhoto"
-                text="next prompt"
-                icon="pi-arrow-right"
-                variant="outlined"
-                @click="goToPhoto(nextPhoto.id)"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="flex flex-col justify-center w-full items-center my-16 md:my-40 gap-16">
-          <ResultImage result-img-url="/images/perfect-photo.webp" />
-          <DefaultButton class="max-w-96" text="Start generate your photos" link="/#pricing" icon="pi-step-forward" />
         </div>
       </div>
-    </div>
-  </div>
 </template>

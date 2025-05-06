@@ -8,7 +8,7 @@ defineProps<{
 </script>
 
 <template>
-  <a :href="`/photo/${photo.id}`" class="relative">
+  <a :href="`/example/${photo.id}`" class="relative">
     <BlurImage
       :src="photo.image_url!"
       :blurhash="photo.blurhash!"

@@ -69,7 +69,7 @@ onMounted(async () => {
   isTabletSnapshot.value = isTablet.value;
   isDesktopSnapshot.value = isDesktop.value;
   isLargeDesktopSnapshot.value = isLargeDesktop.value;
-  const allPhotos = await getExamples();
+  const allPhotos = await getExamples({ shuffle: true });
   photos.value = allPhotos;
   await nextTick(() => {
     updateNavigationStatus();
@@ -112,7 +112,7 @@ function updateNavigationStatus() {
     <!-- Category filter -->
     <div
       v-if="!isLoading && categories.length"
-      :class="isOverflowing ? '' : 'justify-center'"
+      :class="isOverflowing ? '' : 'flex justify-center'"
     >
       <Swiper
         slides-per-view="auto"
@@ -210,6 +210,8 @@ function updateNavigationStatus() {
 :deep(.category-swiper .swiper-button-prev::after) {
   transform: rotate(135deg);
 }
+:deep(.category-swiper .swiper-wrapper) {
+width: 80%;}
 
 :deep(.category-swiper .swiper-button-next) {
   right: -5px;

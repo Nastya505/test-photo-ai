@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import { computed, nextTick, onMounted, ref } from 'vue';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { useMediaQuery } from '@vueuse/core';
 
 const modules = [Navigation];
 const swiperRef = ref<any>(null);
@@ -14,6 +15,7 @@ const isBeginning = ref(true);
 const isEnd = ref(false);
 const isLoading = ref(true);
 const skeletonCount = 5;
+const isDesktop = useMediaQuery('(min-width: 768px)');
 
 const allPacks = ref<components['schemas']['PromptPack'][]>([]);
 const examples = ref<components['schemas']['ExamplePhoto'][]>([]);
@@ -94,8 +96,8 @@ function updateNavState() {
         :slides-per-view="1.2"
         :initial-slide="0"
         :space-between="12"
-        :slides-offset-before="12"
-        :slides-offset-after="12"
+        :slides-offset-before="isDesktop ? 60 : 12"
+        :slides-offset-after="isDesktop ? 60 : 12"
         :navigation="{
           nextEl: '.swiper-next',
           prevEl: '.swiper-prev',

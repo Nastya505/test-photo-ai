@@ -51,8 +51,12 @@ onMounted(async () => {
   isLoading.value = false;
 });
 const displayedPhotos = computed(() => {
-  if (isLargeDesktop.value) return 13;
-  if (isDesktop.value) return 12;
+  if (isLargeDesktop.value) {
+    return 13;
+  }
+  if (isDesktop.value) {
+    return 12;
+  }
   return 11;
 });
 </script>
@@ -65,7 +69,7 @@ const displayedPhotos = computed(() => {
           {{ selectedPackName }} by  AI
         </h1>
         <h3 class="text-base text-white font-medium max-w-[440px] text-center leading-[22px] opacity-80">
-          AI-powered headshots—no photographers, no hassle. Upload, customize, and get pro-quality images instantly
+          AI-powered photos—no photography, no hassle. Upload, customize, and get pro-quality images instantly
         </h3>
       </div>
       <DefaultButton text="Create Perfect Shot" link="#pricing" />
@@ -101,7 +105,7 @@ const displayedPhotos = computed(() => {
       </div>
       <ResultImage result-img-url="/images/perfect-photo.webp" />
       <div class="flex flex-col gap-16 md:gap-40 container mx-auto px-3">
-        <TrustpilotWithReviews title="Customers can’t stop raving about their Headshots" button-text="Create Perfect Shot" />
+        <TrustpilotWithReviews title="Customers can’t stop raving about their Artphoto" button-text="Create Perfect Shot" />
       </div>
       <BlockPricing class="sm:container sm:mx-auto" />
       <div class="flex flex-col gap-16 md:gap-40 container mx-auto px-3">

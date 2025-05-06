@@ -1,10 +1,16 @@
 <script setup lang="ts">
 import type { components } from '@/shared/lib/photo-api';
+import type { Swiper as SwiperType } from 'swiper';
 import { getExamples } from '@/shared/lib/api';
 import { useMediaQuery } from '@vueuse/core';
-import { computed, onMounted, ref } from 'vue';
+import { FreeMode, Navigation } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+
+import { computed, nextTick, onMounted, ref } from 'vue';
 import { DefaultButton } from '../button';
 import PhotoCard from './PhotoCard.vue';
+import 'swiper/css';
+import 'swiper/css/navigation';
 
 const isTablet = useMediaQuery('(min-width: 768px)');
 const isDesktop = useMediaQuery('(min-width: 1023px)');
@@ -18,7 +24,12 @@ const photos = ref<components['schemas']['ExamplePhoto'][]>([]);
 const isLoading = ref(true);
 
 const selectedCategory = ref<string | null>(null);
+const tabsSwiper = ref<SwiperType>();
 
+const swiperFreeModeParams = {
+  enabled: true,
+  minimumVelocity: 1,
+};
 function normalizeCategoryName(name: string): string {
   return name.replace(/\s*\((man|woman)\)\s*/gi, '').trim();
 }
@@ -45,8 +56,12 @@ const filteredPhotos = computed(() => {
 
 // Number of photos to display
 const displayedPhotos = computed(() => {
-  if (isLargeDesktop.value) return filteredPhotos.value.slice(0, 13);
-  if (isDesktop.value) return filteredPhotos.value.slice(0, 12);
+  if (isLargeDesktop.value) {
+    return filteredPhotos.value.slice(0, 13);
+  }
+  if (isDesktop.value) {
+    return filteredPhotos.value.slice(0, 12);
+  }
   return filteredPhotos.value.slice(0, 11);
 });
 
@@ -56,6 +71,10 @@ onMounted(async () => {
   isLargeDesktopSnapshot.value = isLargeDesktop.value;
   const allPhotos = await getExamples();
   photos.value = allPhotos;
+  await nextTick(() => {
+    updateNavigationStatus();
+  });
+  window.addEventListener('resize', updateNavigationStatus);
   isLoading.value = false;
 });
 
@@ -67,45 +86,56 @@ function getCardClass(itemIndex: number, isTabletLocal = isTablet.value) {
   return itemIndex % 4 === 1 ? 'row-span-2 h-[1156px]' : 'row-span-1 h-[570px]';
 }
 
-const categoryContainer = ref<HTMLElement | null>(null);
-const isOverflowing = ref(false);
+const isOverflowing = ref<boolean | null>(false);
 
-// Ref and logic to check if category container overflows horizontally
-function checkOverflow() {
-  const el = categoryContainer.value;
-  if (el) {
-    isOverflowing.value = el.scrollWidth > el.clientWidth;
+function updateNavigationStatus() {
+  const swiper = tabsSwiper.value;
+  if (!swiper) {
+    return;
   }
+
+  const nextBtn = swiper.navigation?.nextEl;
+  const prevBtn = swiper.navigation?.prevEl;
+
+  const nextVisible = nextBtn && window.getComputedStyle(nextBtn).display !== 'none' && !nextBtn.classList.contains('swiper-button-disabled');
+  const prevVisible = prevBtn && window.getComputedStyle(prevBtn).display !== 'none' && !prevBtn.classList.contains('swiper-button-disabled');
+  const newOverflowingState = nextVisible || prevVisible;
+  if (isOverflowing.value !== newOverflowingState) {
+    isOverflowing.value = newOverflowingState;
+  }
+  tabsSwiper.value?.update();
 }
-
-onMounted(() => {
-  checkOverflow();
-  window.addEventListener('resize', checkOverflow);
-});
-
-watch(() => categoryContainer.value, () => checkOverflow());
 </script>
 
 <template>
-  <section class="flex flex-col gap-8">
+  <section class="flex flex-col gap-8 overflow-hidden">
     <!-- Category filter -->
     <div
       v-if="!isLoading && categories.length"
-      ref="categoryContainer"
-      class="flex gap-1 overflow-x-auto flex-nowrap whitespace-nowrap px-2 scroll-hidden"
       :class="isOverflowing ? '' : 'justify-center'"
     >
-      <button
-        v-for="category in categories"
-        :key="category"
-        class="cursor-pointer px-4 py-2 min-w-max rounded-xl text-lg transition-all hover:bg-white hover:text-black"
-        :class="(selectedCategory === null && category === 'All') || selectedCategory === category
-          ? 'bg-white text-black'
-          : 'bg-white/10 text-white'"
-        @click="selectedCategory = category === 'All' ? null : category"
+      <Swiper
+        slides-per-view="auto"
+        navigation
+        :space-between="16"
+        :free-mode="swiperFreeModeParams"
+        :modules="[FreeMode, Navigation]"
+        :threshold="15"
+        class="category-swiper relative"
+        @swiper="tabsSwiper = $event"
       >
-        {{ category }}
-      </button>
+        <SwiperSlide v-for="category in categories" :key="category" class="!w-auto">
+          <button
+            class="cursor-pointer px-4 py-2 min-w-max rounded-xl text-lg transition-all hover:bg-white hover:text-black"
+            :class="(selectedCategory === null && category === 'All') || selectedCategory === category
+              ? 'bg-white text-black'
+              : 'bg-white/10 text-white'"
+            @click="selectedCategory = category === 'All' ? null : category"
+          >
+            {{ category }}
+          </button>
+        </SwiperSlide>
+      </Swiper>
     </div>
 
     <div class="relative">
@@ -136,3 +166,61 @@ watch(() => categoryContainer.value, () => checkOverflow());
     <DefaultButton v-if="!isLoading" class="mx-auto -mt-20 z-11" text="Create Perfect Shot" link="#pricing" />
   </section>
 </template>
+
+<style scoped>
+:deep(.category-swiper .swiper-button-next),
+:deep(.category-swiper .swiper-button-prev) {
+  position: absolute;
+  top: 50%;
+  bottom: 0;
+  width: 20%;
+  max-width: 40px;
+  height: 44px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s;
+  cursor: pointer;
+}
+
+:deep(.category-swiper .swiper-button-next::after),
+:deep(.category-swiper .swiper-button-prev::after) {
+  content: '';
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 6px;
+}
+
+:deep(.category-swiper .swiper-button-disabled) {
+  opacity: 0;
+  pointer-events: none;
+}
+
+:deep(.category-swiper .swiper-button-prev) {
+  left:-5px;
+  background: linear-gradient(
+    270deg,
+    rgba(4, 4, 6, 0) 0%,
+    rgba(4, 4, 6, 0.95) 35%
+  );
+}
+
+:deep(.category-swiper .swiper-button-prev::after) {
+  transform: rotate(135deg);
+}
+
+:deep(.category-swiper .swiper-button-next) {
+  right: -5px;
+  background: linear-gradient(
+    90deg,
+    rgba(4, 4, 6, 0) 0%,
+    rgba(4, 4, 6, 0.95) 25%
+  );
+}
+
+:deep(.category-swiper .swiper-button-next::after) {
+  transform: rotate(-45deg);
+}
+</style>

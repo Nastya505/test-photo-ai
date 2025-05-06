@@ -2,12 +2,12 @@
 import type { components } from '@/shared/lib/photo-api';
 import { getExamples } from '@/shared/lib/api';
 import { DefaultButton } from '@/widgets/button';
+import { ResultImage } from '@/widgets/media-blocks';
 import { ResultLine } from '@/widgets/resultLine/intex';
 import { SwiperDefault } from '@/widgets/swiper';
 import { domToBlob } from 'modern-screenshot';
 import { computed, nextTick, onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import {ResultImage } from '@/widgets/media-blocks';
 
 const route = useRoute();
 const router = useRouter();

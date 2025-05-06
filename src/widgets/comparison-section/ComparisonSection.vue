@@ -23,7 +23,7 @@ watch(isDesktop, (value) => {
 <template>
   <div class="text-center">
     <h2 class="text-2xl sm:text-6xl mb-3 sm:mb-6 text-white font-medium text-center">
-      How does HeadshotAI compare to other AI?
+      How does Artphoto AI compare to other AI?
     </h2>
     <h3 class="text-base text-white font-medium mx-auto max-w-xl text-center leading-[22px] opacity-80 mb-6 sm:mb-16">
       With the same uploaded selfies, Photo AI performs far better than competitors in photorealism and resemblance.
@@ -60,13 +60,13 @@ watch(isDesktop, (value) => {
           class="flex w-full flex-col justify-end !items-start h-full box-border z-10 pb-16 md:pb-32 lg:pb-0"
         >
           <div
-            class="h-full mx-1 lg:h-auto mb-4 z-10 box-border"
+            class="h-full w-full lg:h-auto mb-4 z-10 box-border overflow-hidden"
           >
             <img
               :src="comp.image"
               :alt="comp.name"
               loading="lazy"
-              class="object-cover rounded-lg w-full h-full"
+              class="object-cover mx-1 rounded-lg w-full h-full"
             >
           </div>
 

@@ -91,9 +91,9 @@ function updateNavState() {
     <div class="w-screen relative mt-9 md:mt-20">
       <Swiper
         :modules="modules"
-        :slides-per-view="1.1"
+        :slides-per-view="1.2"
         :initial-slide="0"
-        :space-between="6"
+        :space-between="12"
         :slides-offset-before="12"
         :slides-offset-after="12"
         :navigation="{
@@ -128,13 +128,12 @@ function updateNavState() {
               </div>
 
               <h2
-                class="font-medium text-white max-w-8/9 text-left whitespace-nowrap overflow-hidden text-ellipsis mt-5 mb-3"
-                style="font-size: clamp(1.25rem, 2vw, 1.875rem);"
+                class="font-medium text-base lg:text-lg xl:text-xl 2xl:text-2xl text-white max-w-8/9 text-left whitespace-nowrap overflow-hidden text-ellipsis mt-5 mb-3"
               >
                 {{ pack.name }}
               </h2>
 
-              <p class="text-white/30 max-w-8/9 italic text-base font-semibold line-clamp-3">
+              <p class="text-white/30 text-sm max-w-8/9 italic lg:text-base font-semibold line-clamp-3">
                 {{ pack.description }}
               </p>
             </RouterLink>
@@ -157,7 +156,7 @@ function updateNavState() {
 
     <div class="flex justify-between items-stretch container mt-6 md:mt-10  mx-auto px-3 md:px-0">
       <div
-        class="flex items-center justify-center italic text-base font-semibold text-white/30"
+        class="flex items-center justify-center italic text-sm sm:text-base font-semibold text-white/30"
       >
         {{ visibleSlides }} / {{ totalSlides }}
       </div>

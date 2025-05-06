@@ -15,7 +15,7 @@ async function copyToClipboard(text: string) {
 <template>
   <section class="flex flex-col md:flex-row items-stretch justify-between gap-10">
     <div class="overflow-hidden rounded-xl max-w-[700px]">
-      <Image :src="imageUrl" alt="Perfect Headshot" class="w-full h-auto object-cover" loading="lazy" />
+      <Image :src="imageUrl" alt="Perfect Photo" class="w-full h-auto object-cover" loading="lazy" />
     </div>
     <div class="flex flex-col justify-between items-start  text-white">
       <h2 class="text-4xl font-medium max-w-[500px] mb-6 mr-0 2xl:mr-48">

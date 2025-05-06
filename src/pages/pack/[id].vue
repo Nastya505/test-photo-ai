@@ -37,8 +37,7 @@ onMounted(async () => {
   isDesktopSnapshot.value = isDesktop.value;
   isLargeDesktopSnapshot.value = isLargeDesktop.value;
   const packId = route.params.id as string;
-  const examples = await getExamples({prompt_pack_id:packId});
-
+  const examples = await getExamples({ prompt_pack_id: packId });
 
   allPhotos.value = examples;
   if (examples.length > 0) {

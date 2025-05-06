@@ -27,7 +27,7 @@ const props = defineProps<{
           loading="lazy"
           class="block lg:hidden w-full"
           src="/images/photo-section-mobile.webp"
-        />
+        >
         <div class="absolute -bottom-20 lg:top-25 right-0 lg:-right-1/4 xl:-right-1/3 2xl:-right-1/2 w-1/2">
           <Image
             loading="lazy"

@@ -20,21 +20,26 @@ export async function getExamples({
 } = {}) {
   const queryParams: Record<string, any> = {};
 
-  if (limit !== null) queryParams.limit = limit;
-  if (shuffle !== false) queryParams.shuffle = shuffle; 
-  if (prompt_pack_id !== null) queryParams.prompt_pack_id = prompt_pack_id;
-
+  if (limit !== null) {
+    queryParams.limit = limit;
+  }
+  if (shuffle !== false) {
+    queryParams.shuffle = shuffle;
+  }
+  if (prompt_pack_id !== null) {
+    queryParams.prompt_pack_id = prompt_pack_id;
+  }
 
   const { data, error } = await client.GET('/public/v1/get-examples', {
     params: {
-      query:queryParams,
-    }
+      query: queryParams,
+    },
   });
 
   if (error) {
     throw error;
   }
-console.log(data)
+  console.log(data);
   return data;
 }
 
@@ -46,7 +51,7 @@ export async function getExampleById(id: string) {
   if (error) {
     throw error;
   }
-  console.log(data)
+  console.log(data);
 
   return data;
 }
@@ -57,7 +62,7 @@ export async function getPacks() {
   if (error) {
     throw error;
   }
-  console.log(data)
+  console.log(data);
 
   return data;
 }

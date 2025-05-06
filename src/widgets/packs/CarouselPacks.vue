@@ -2,12 +2,12 @@
 import type { components } from '@/shared/lib/photo-api';
 import { getExamples, getPacks } from '@/shared/lib/api';
 import { DefaultButton } from '@/widgets/button';
+import { useMediaQuery } from '@vueuse/core';
 import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { computed, nextTick, onMounted, ref } from 'vue';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { useMediaQuery } from '@vueuse/core';
 
 const modules = [Navigation];
 const swiperRef = ref<any>(null);

@@ -18,7 +18,7 @@ const isLoading = ref(true);
 const currentPhotoRef = ref<HTMLImageElement | null>(null);
 
 const currentPhoto = ref<components['schemas']['ExamplePhoto'] | null>(null);
-const currentPhotoId=route.params.id as string;
+const currentPhotoId = route.params.id as string;
 const currentIndex = computed(() => {
   return allPhotos.value.findIndex(p => String(p.id) === currentPhotoId);
 });
@@ -61,7 +61,7 @@ const similarPhotos = computed(() => {
 });
 
 onMounted(async () => {
-  allPhotos.value = await getExamples({shuffle:true});
+  allPhotos.value = await getExamples({ shuffle: true });
   currentPhoto.value = await getExampleById(currentPhotoId);
   isLoading.value = false;
 });

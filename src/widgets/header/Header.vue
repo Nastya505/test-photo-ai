@@ -71,7 +71,8 @@ onUnmounted(() => {
     </nav>
 
     <!-- Mobile Menu Button -->
-    <button v-if="props.showHeader"
+    <button
+      v-if="props.showHeader"
       class="md:hidden text-white"
       aria-label="Open mobile menu"
       @click="toggleMenu"
@@ -80,7 +81,7 @@ onUnmounted(() => {
     </button>
 
     <!-- Mobile Menu Overlay -->
-    <transition name="fade" v-if="props.showHeader">
+    <transition v-if="props.showHeader" name="fade">
       <div
         v-if="isMobileMenuOpen"
         class="fixed inset-0 z-50 h-screen bg-black text-white flex flex-col gap-16 py-20 px-8 items-start justify-start text-2xl"

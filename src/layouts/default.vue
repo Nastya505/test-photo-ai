@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import { useRoute } from 'vue-router';
-
 import { Footer } from '@/widgets/footer';
 import { Header } from '@/widgets/header';
+
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
 
 const route = useRoute();
 
@@ -22,7 +22,7 @@ const hideLayout = computed(() => {
       loading="lazy"
     />
     <div class="mt-2.5 md:mt-5 z-1">
-      <Header  :showHeader="!hideLayout" />
+      <Header :show-header="!hideLayout" />
       <div>
         <slot />
       </div>

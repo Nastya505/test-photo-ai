@@ -45,7 +45,7 @@ onMounted(async () => {
         <div class="w-full md:w-1/2 rounded-2xl overflow-hidden">
           <img :src="currentPhoto.image_url!" class="w-full h-full" loading="lazy">
         </div>
-        <DefaultButton text="Create Your Perfect Shot" link="/#pricing" icon="pi-arrow-circle-right" />
+        <DefaultButton text="Create Your Perfect Shot" link="/" icon="pi-arrow-circle-right" />
       </div>
     </div>
   </div>
